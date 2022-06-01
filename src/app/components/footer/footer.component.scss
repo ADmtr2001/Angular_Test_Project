@@ -1,0 +1,38 @@
+footer {
+  background-color: #3F51B5;
+  min-height: 6rem;
+  padding: 2rem 2rem 0.5rem 2rem;
+
+  color: white;
+
+  .top {
+    display: flex;
+    justify-content: space-between;
+
+    .links {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      gap: 0 3rem;
+      a {
+        font-size: 2.5rem;
+      }
+    }
+
+    .socials {
+      a + a {
+        margin-left: 1rem;
+      }
+    }
+  }
+
+  .mat-divider {
+    border-top-color: #fff;
+
+    margin: 1rem 0;
+  }
+
+  .bot {
+    text-align: center;
+  }
+}
