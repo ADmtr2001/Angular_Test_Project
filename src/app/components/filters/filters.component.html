@@ -1,0 +1,18 @@
+<section>
+  <form>
+    <mat-form-field class="search" appearance="fill">
+      <mat-label>Search...</mat-label>
+      <input type="email" matInput [formControl]="searchQuery">
+    </mat-form-field>
+
+    <mat-form-field class="category" appearance="fill">
+      <mat-label>Category</mat-label>
+      <mat-select [formControl]="category">
+        <mat-select-trigger>
+          {{category.value}}
+        </mat-select-trigger>
+        <mat-option *ngFor="let category of categories" [value]="category">{{category}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</section>
