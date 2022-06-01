@@ -58,6 +58,36 @@ select {
   font: inherit;
 }
 
+html {
+  font-size: 62.5%; /* 1 */
+  height: 100%;
+  background-color: #FFFFFF;
+  font-family: 'Radio Canada', sans-serif;
+}
+
+body {
+  font-size: 1.6rem;
+  height: 100%;
+}
+
+button {
+  cursor: pointer;
+  outline: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h2 {
+  margin-bottom: 2rem;
+}
+
+section {
+  padding: 1rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
