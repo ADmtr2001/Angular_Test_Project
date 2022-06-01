@@ -10,6 +10,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { FiltersComponent } from './components/filters/filters.component';
 import { DishesComponent } from './pages/dishes/dishes.component';
+import { DishesListComponent } from './components/dishes-list/dishes-list.component';
+import { DishesItemComponent } from './components/dishes-list/dishes-item/dishes-item.component';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { DishesComponent } from './pages/dishes/dishes.component';
     NavbarComponent,
     FooterComponent,
     FiltersComponent,
-    DishesComponent
+    DishesComponent,
+    DishesListComponent,
+    DishesItemComponent
   ],
   imports: [
     BrowserModule,
