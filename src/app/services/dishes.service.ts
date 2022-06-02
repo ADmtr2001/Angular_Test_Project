@@ -8,7 +8,7 @@ import {IDish} from "../types";
   providedIn: 'root'
 })
 export class DishesService {
-  // private dishes: IDish[] = [];
+  // private dishes-page: IDish[] = [];
 
   constructor(private http: HttpClient) { }
 

@@ -10,10 +10,11 @@ import {MaterialModule} from "./material/material.module";
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { FiltersComponent } from './components/filters/filters.component';
-import { DishesComponent } from './pages/dishes/dishes.component';
+import { DishesPageComponent } from './pages/dishes-page/dishes-page.component';
 import { DishesListComponent } from './components/dishes-list/dishes-list.component';
 import { DishesItemComponent } from './components/dishes-list/dishes-item/dishes-item.component';
 import { SelectedDishModalContentComponent } from './components/modal/selected-dish-modal-content/selected-dish-modal-content.component';
+import { ShoppingCartPageComponent } from './pages/shopping-cart-page/shopping-cart-page.component';
 
 
 @NgModule({
@@ -22,10 +23,11 @@ import { SelectedDishModalContentComponent } from './components/modal/selected-d
     NavbarComponent,
     FooterComponent,
     FiltersComponent,
-    DishesComponent,
+    DishesPageComponent,
     DishesListComponent,
     DishesItemComponent,
-    SelectedDishModalContentComponent
+    SelectedDishModalContentComponent,
+    ShoppingCartPageComponent
   ],
   imports: [
     BrowserModule,
