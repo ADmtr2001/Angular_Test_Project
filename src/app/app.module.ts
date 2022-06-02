@@ -13,6 +13,7 @@ import { FiltersComponent } from './components/filters/filters.component';
 import { DishesComponent } from './pages/dishes/dishes.component';
 import { DishesListComponent } from './components/dishes-list/dishes-list.component';
 import { DishesItemComponent } from './components/dishes-list/dishes-item/dishes-item.component';
+import { SelectedDishModalContentComponent } from './components/modal/selected-dish-modal-content/selected-dish-modal-content.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { DishesItemComponent } from './components/dishes-list/dishes-item/dishes
     FiltersComponent,
     DishesComponent,
     DishesListComponent,
-    DishesItemComponent
+    DishesItemComponent,
+    SelectedDishModalContentComponent
   ],
   imports: [
     BrowserModule,
