@@ -11,5 +11,4 @@ export class DishesComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

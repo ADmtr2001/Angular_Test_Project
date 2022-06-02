@@ -1,7 +1,9 @@
 section {
   margin-top: 2rem;
+
   form {
     display: flex;
+
     font-size: 1.5rem;
 
     .search {
@@ -14,7 +16,8 @@ section {
   }
 
   .example-additional-selection {
-    opacity: 0.75;
     font-size: 0.75em;
+
+    opacity: 0.75;
   }
 }
