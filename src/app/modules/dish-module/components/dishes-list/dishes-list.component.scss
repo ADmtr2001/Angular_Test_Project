@@ -3,5 +3,9 @@ section {
 
   .mat-grid-tile {
     box-shadow: 0.3rem 0.3rem 1rem 0.1rem rgba(0, 0, 0, 0.15);
+
+    & ::ng-deep .mat-grid-tile-content {
+      align-items: start;
+    }
   }
 }

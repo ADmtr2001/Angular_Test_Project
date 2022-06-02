@@ -1,0 +1,9 @@
+.mat-toolbar {
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+
+  button + button {
+    margin-left: 1rem;
+  }
+}

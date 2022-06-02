@@ -1,10 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 
-import {IDish} from "../../../types";
 import {MatDialog} from "@angular/material/dialog";
 import {
   SelectedDishModalContentComponent
-} from "../../modal/selected-dish-modal-content/selected-dish-modal-content.component";
+} from "../selected-dish-modal-content/selected-dish-modal-content.component";
+
+import {IDish} from "../../../../types";
 
 @Component({
   selector: 'app-dishes-item',

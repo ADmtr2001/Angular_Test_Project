@@ -84,9 +84,10 @@ h2 {
   margin-bottom: 2rem;
 }
 
-.mat-grid-tile-content {
-  align-items: start !important;
-}
+// change to ng-deep
+//.mat-grid-tile-content {
+//  align-items: start !important;
+//}
 
 @media (prefers-reduced-motion: reduce) {
   * {

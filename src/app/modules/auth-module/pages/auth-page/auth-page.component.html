@@ -1,0 +1,17 @@
+<section>
+  <form>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Email</mat-label>
+      <input type="email" matInput [formControl]="email">
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Password</mat-label>
+      <input type="password" matInput [formControl]="password">
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill" *ngIf="isSignUpForm">
+      <mat-label>Confirm Password</mat-label>
+      <input type="password" matInput [formControl]="passwordConfirm">
+    </mat-form-field>
+  </form>
+  <button (click)="toggleForm()">{{isSignUpForm ? 'Already have an account? Login' : "Don't have an account? Signup"}}</button>
+</section>

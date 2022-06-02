@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 
+import {BehaviorSubject, first} from "rxjs";
 import {HttpClient} from "@angular/common/http";
+
+import {environment} from "../../environments/environment";
 
 import {IDish} from "../types";
 
@@ -8,11 +11,12 @@ import {IDish} from "../types";
   providedIn: 'root'
 })
 export class DishesService {
-  // private dishes-page: IDish[] = [];
+  public dishes$: BehaviorSubject<IDish[]> = new BehaviorSubject<IDish[]>([]);
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
-  getDishes() {
-    return this.http.get<IDish[]>('http://localhost:5000/api/v1/dish');
+  public fetchDishes(): void {
+    this.http.get<IDish[]>(`${environment.api_url}/dish`).pipe(first()).subscribe((dishes) => this.dishes$.next(dishes));
   }
 }

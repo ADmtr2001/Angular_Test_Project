@@ -1,43 +1,39 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import {NgModule} from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MaterialModule} from "./material/material.module";
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { FiltersComponent } from './components/filters/filters.component';
-import { DishesPageComponent } from './pages/dishes-page/dishes-page.component';
-import { DishesListComponent } from './components/dishes-list/dishes-list.component';
-import { DishesItemComponent } from './components/dishes-list/dishes-item/dishes-item.component';
-import { SelectedDishModalContentComponent } from './components/modal/selected-dish-modal-content/selected-dish-modal-content.component';
-import { ShoppingCartPageComponent } from './pages/shopping-cart-page/shopping-cart-page.component';
+import {BrowserModule} from '@angular/platform-browser';
+import {ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import {AppRoutingModule} from './app-routing.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
+import {MaterialModule} from "./modules/material-module/material.module";
+import {DishModule} from "./modules/dish-module/dish.module";
+import {AuthModule} from "./modules/auth-module/auth.module";
+import {ShoppingCartModule} from "./modules/shopping-cart-module/shopping-cart.module";
+
+import {AppComponent} from './app.component';
+import {NavbarComponent} from './shared/navbar/navbar.component';
+import {FooterComponent} from './shared/footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     FooterComponent,
-    FiltersComponent,
-    DishesPageComponent,
-    DishesListComponent,
-    DishesItemComponent,
-    SelectedDishModalContentComponent,
-    ShoppingCartPageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MaterialModule,
+    DishModule,
+    AuthModule,
+    ShoppingCartModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

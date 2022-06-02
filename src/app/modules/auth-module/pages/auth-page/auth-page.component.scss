@@ -1,0 +1,32 @@
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  margin: 5rem auto 0;
+  width: 55rem;
+
+  background-color: #3F51B5;
+  box-shadow: 0.3rem 0.3rem 1rem 0.1rem rgba(0, 0, 0, 0.15);
+
+  padding: 2rem;
+
+  form {
+    width: 100%;
+
+    & ::ng-deep .mat-form-field-flex {
+      background-color: white;
+    }
+
+    .example-full-width {
+      width: 100%;
+    }
+  }
+
+  > button {
+    color: white;
+    background-color: transparent;
+    border: none;
+  }
+}

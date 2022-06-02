@@ -11,3 +11,9 @@
     flex: 1;
   }
 }
+
+@media (max-width: 900px) {
+  .container {
+    padding: 0;
+  }
+}
