@@ -3,8 +3,9 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl} from "@angular/forms";
 import {DishesService} from "../../../../services/dishes.service";
 import {BehaviorSubject} from "rxjs";
-import {Dish, OrderItem} from "../../../../types";
 import {ShoppingCartService} from "../../../../services/shopping-cart.service";
+import Dish from "../../../../types/Dish";
+import {OrderItem} from "../../../../types/Order";
 
 @Component({
   selector: 'app-dish-modal-content',

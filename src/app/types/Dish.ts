@@ -1,4 +1,4 @@
-interface Dish {
+export interface Dish {
   _id: string;
   title: string;
   price: number;

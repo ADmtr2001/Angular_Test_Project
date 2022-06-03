@@ -21,18 +21,18 @@
     </form>
   </div>
 
-  <div class="cart-info">
+  <div class="cart-info" *ngIf="(order$ | async) as order">
     <div class="preview">
       <h2 class="title">Your Order</h2>
 
-      <div class="empty-message" *ngIf="(order$ | async)?.length === 0">
+      <div class="empty-message" *ngIf="order.items.length === 0">
         <mat-divider></mat-divider>
         <p>You order list is currently empty</p>
         <button mat-stroked-button [routerLink]="'/'">Search Dishes</button>
       </div>
 
       <div class="items-list">
-        <article class="item" *ngFor="let item of (order$ | async)">
+        <article class="item" *ngFor="let item of order.items">
 
           <div class="image">
             <img src="{{item.dish.image}}" alt="">
@@ -63,9 +63,9 @@
         </article>
       </div>
 
-      <div class="total" *ngIf="(order$ | async)?.length !== 0">
+      <div class="total" *ngIf="order.items.length !== 0">
         <mat-divider></mat-divider>
-        <p>Total: 12345$</p>
+        <p>Total: {{order.totalPrice}}$</p>
       </div>
     </div>
   </div>

@@ -1,10 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl} from "@angular/forms";
 
 import {BehaviorSubject} from "rxjs";
 import {ShoppingCartService} from "../../../../services/shopping-cart.service";
-
-import {OrderItem} from "../../../../types";
+import {Order} from "../../../../types/Order";
 
 @Component({
   selector: 'app-shopping-cart-page',
@@ -12,7 +11,7 @@ import {OrderItem} from "../../../../types";
   styleUrls: ['./shopping-cart-page.component.scss']
 })
 export class ShoppingCartPageComponent implements OnInit {
-  public order$: BehaviorSubject<OrderItem[]>;
+  public order$: BehaviorSubject<Order>;
 
   public name = new FormControl('');
   public surname = new FormControl('');

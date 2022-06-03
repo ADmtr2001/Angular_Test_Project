@@ -4,8 +4,7 @@ import {BehaviorSubject, first} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 
 import {environment} from "../../environments/environment";
-
-import {Dish} from "../types";
+import Dish from "../types/Dish";
 
 @Injectable({
   providedIn: 'root'

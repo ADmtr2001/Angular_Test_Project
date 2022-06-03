@@ -5,8 +5,8 @@ import {
   DishModalContentComponent
 } from "../dish-modal-content/dish-modal-content.component";
 
-import {Dish} from "../../../../types";
 import {DishesService} from "../../../../services/dishes.service";
+import Dish from "../../../../types/Dish";
 
 @Component({
   selector: 'app-dishes-item',
