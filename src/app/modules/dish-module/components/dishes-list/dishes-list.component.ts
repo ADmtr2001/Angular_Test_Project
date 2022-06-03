@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 import {DishesService} from "../../../../services/dishes.service";
 
-import {IDish} from "../../../../types";
+import {Dish} from "../../../../types";
 
 @Component({
   selector: 'app-dishes-list',
@@ -12,7 +12,7 @@ import {IDish} from "../../../../types";
   // providers: [DishesService] Check Info About
 })
 export class DishesListComponent implements OnInit {
-  dishes$: BehaviorSubject<IDish[]>;
+  public dishes$: BehaviorSubject<Dish[]>;
 
   constructor(private dishesService: DishesService) {
     this.dishes$ = this.dishesService.dishes$;

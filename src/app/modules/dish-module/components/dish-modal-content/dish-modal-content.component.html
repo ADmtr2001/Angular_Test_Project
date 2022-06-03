@@ -1,14 +1,14 @@
 <section>
   <mat-dialog-content class="mat-typography">
     <div class="image">
-      <img src="{{(selectedDish$ | async)?.image}}" alt="dish">
+      <img src="{{selectedDish?.image}}" alt="dish">
     </div>
     <div class="description">
       <div class="content">
-        <h2 class="title">{{(selectedDish$ | async)?.title}}</h2>
-        <p class="text"><span>Description: </span>{{(selectedDish$ | async)?.description}}</p>
-        <p class="text"><span>Ingredients: </span>{{(selectedDish$ | async)?.ingredients}}</p>
-        <p class="price">{{(selectedDish$ | async)?.price}}$</p>
+        <h2 class="title">{{selectedDish?.title}}</h2>
+        <p class="text"><span>Description: </span>{{selectedDish?.description}}</p>
+        <p class="text"><span>Ingredients: </span>{{selectedDish?.ingredients}}</p>
+        <p class="price">{{selectedDish?.price}}$</p>
       </div>
     </div>
   </mat-dialog-content>
@@ -18,7 +18,7 @@
       <mat-label>Amount</mat-label>
       <input type="number" matInput [formControl]="amount">
     </mat-form-field>
-    <button mat-stroked-button [mat-dialog-close]="true">Add</button>
+    <button mat-stroked-button [mat-dialog-close]="true" (click)="addDishToCart()">Add</button>
     <button mat-stroked-button mat-dialog-close>Close</button>
   </mat-dialog-actions>
 </section>

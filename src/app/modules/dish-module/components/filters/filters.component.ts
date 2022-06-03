@@ -8,10 +8,10 @@ import {FormControl} from '@angular/forms';
   styleUrls: ['./filters.component.scss']
 })
 export class FiltersComponent implements OnInit {
-  searchQuery = new FormControl('');
-  category = new FormControl();
+  public searchQuery = new FormControl('');
+  public category = new FormControl();
 
-  categories: string[] = ['Pizza', 'Meat', 'Dessert', 'Rolls'];
+  public categories: string[] = ['Pizza', 'Meat', 'Dessert', 'Rolls'];
 
   constructor() { }
 

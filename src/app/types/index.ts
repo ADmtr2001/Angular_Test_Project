@@ -1,5 +1,7 @@
-import IDish from "./IDish";
+import Dish from "./Dish";
+import OrderItem from "./OrderItem";
 
 export {
-  IDish
+  Dish,
+  OrderItem,
 }

@@ -5,7 +5,7 @@ import {
   DishModalContentComponent
 } from "../dish-modal-content/dish-modal-content.component";
 
-import {IDish} from "../../../../types";
+import {Dish} from "../../../../types";
 import {DishesService} from "../../../../services/dishes.service";
 
 @Component({
@@ -14,7 +14,7 @@ import {DishesService} from "../../../../services/dishes.service";
   styleUrls: ['./dishes-item.component.scss']
 })
 export class DishesItemComponent {
-  @Input() dish!: IDish;
+  @Input() dish!: Dish;
 
   constructor(private dialog: MatDialog, private dishesService: DishesService) {
   }
@@ -22,10 +22,8 @@ export class DishesItemComponent {
   public openDialog(): void {
     this.dishesService.setSelectedDish(this.dish)
 
-    const dialogRef = this.dialog.open(DishModalContentComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+    const dialogRef = this.dialog.open(DishModalContentComponent, {
+      width: '80rem',
     });
   }
 }

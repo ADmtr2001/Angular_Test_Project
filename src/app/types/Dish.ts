@@ -1,4 +1,4 @@
-interface IDish {
+interface Dish {
   _id: string;
   title: string;
   price: number;
@@ -8,4 +8,4 @@ interface IDish {
   ingredients: string;
 }
 
-export default IDish;
+export default Dish;

@@ -8,18 +8,18 @@ import {FormControl} from "@angular/forms";
   styleUrls: ['./auth-page.component.scss']
 })
 export class AuthPageComponent implements OnInit {
-  isSignUpForm = true;
+  public isSignUpForm = true;
 
-  email = new FormControl('');
-  password = new FormControl('');
-  passwordConfirm = new FormControl('');
+  public email = new FormControl('');
+  public password = new FormControl('');
+  public passwordConfirm = new FormControl('');
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  toggleForm() {
+  public toggleForm(): void {
     this.isSignUpForm = !this.isSignUpForm;
   }
 }
