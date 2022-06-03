@@ -10,15 +10,15 @@ import {DishesPageComponent} from "./pages/dishes-page/dishes-page.component";
 import {DishesListComponent} from "./components/dishes-list/dishes-list.component";
 import {DishesItemComponent} from "./components/dishes-item/dishes-item.component";
 import {
-  SelectedDishModalContentComponent
-} from "./components/selected-dish-modal-content/selected-dish-modal-content.component";
+  DishModalContentComponent
+} from "./components/dish-modal-content/dish-modal-content.component";
 
 const DishComponents = [
   DishesPageComponent,
   DishesListComponent,
   DishesItemComponent,
   FiltersComponent,
-  SelectedDishModalContentComponent
+  DishModalContentComponent
 ];
 
 @NgModule({

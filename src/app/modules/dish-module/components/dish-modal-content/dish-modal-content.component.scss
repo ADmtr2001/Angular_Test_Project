@@ -1,0 +1,63 @@
+section {
+  height: 100%;
+  .mat-dialog-title {
+    text-align: center;
+  }
+
+  .mat-dialog-content {
+    display: flex;
+    height: 100%;
+
+    overflow: hidden;
+
+    .image {
+      width: 50%;
+    }
+
+    .description {
+      width: 50%;
+      margin-left: 1rem;
+
+      .content {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
+        font-size: 1.6rem;
+
+        .title {
+          font-size: 3rem;
+          text-align: center;
+        }
+
+        .price {
+          margin-top: auto;
+          margin-bottom: 0;
+
+          text-align: end;
+          font-size: 2rem;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+
+  .mat-dialog-actions {
+    display: flex;
+    align-items: center;
+
+    > * {
+      height: 5rem;
+    }
+
+    .example-form-field {
+      width: 10rem;
+
+      margin-right: 1rem;
+
+      .mat-form-field-underline {
+        display: none;
+      }
+    }
+  }
+}

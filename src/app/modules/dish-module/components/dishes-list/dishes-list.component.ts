@@ -9,10 +9,10 @@ import {IDish} from "../../../../types";
   selector: 'app-dishes-list',
   templateUrl: './dishes-list.component.html',
   styleUrls: ['./dishes-list.component.scss'],
-  providers: [DishesService]
+  // providers: [DishesService] Check Info About
 })
 export class DishesListComponent implements OnInit {
-  public dishes$: BehaviorSubject<IDish[]>;
+  dishes$: BehaviorSubject<IDish[]>;
 
   constructor(private dishesService: DishesService) {
     this.dishes$ = this.dishesService.dishes$;

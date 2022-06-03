@@ -2,10 +2,11 @@ import {Component, Input} from '@angular/core';
 
 import {MatDialog} from "@angular/material/dialog";
 import {
-  SelectedDishModalContentComponent
-} from "../selected-dish-modal-content/selected-dish-modal-content.component";
+  DishModalContentComponent
+} from "../dish-modal-content/dish-modal-content.component";
 
 import {IDish} from "../../../../types";
+import {DishesService} from "../../../../services/dishes.service";
 
 @Component({
   selector: 'app-dishes-item',
@@ -15,10 +16,13 @@ import {IDish} from "../../../../types";
 export class DishesItemComponent {
   @Input() dish!: IDish;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(private dialog: MatDialog, private dishesService: DishesService) {
+  }
 
-  openDialog() {
-    const dialogRef = this.dialog.open(SelectedDishModalContentComponent);
+  public openDialog(): void {
+    this.dishesService.setSelectedDish(this.dish)
+
+    const dialogRef = this.dialog.open(DishModalContentComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
