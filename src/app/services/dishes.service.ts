@@ -12,8 +12,7 @@ import {Dish} from "../types";
 })
 export class DishesService {
   public dishes$: BehaviorSubject<Dish[]> = new BehaviorSubject<Dish[]>([]);
-  // Насколько правильно указаны типы
-  public selectedDish$: BehaviorSubject<Dish | null> = new BehaviorSubject<Dish | null>(null);
+  public selectedDish$: BehaviorSubject<Dish> = new BehaviorSubject<Dish>({} as Dish);
 
   constructor(private http: HttpClient) {
   }
@@ -22,7 +21,7 @@ export class DishesService {
     this.http.get<Dish[]>(`${environment.api_url}/dish`).pipe(first()).subscribe((dishes) => this.dishes$.next(dishes));
   }
 
-  public setSelectedDish(dish: Dish | null): void {
+  public setSelectedDish(dish: Dish): void {
     this.selectedDish$.next(dish);
   }
 }

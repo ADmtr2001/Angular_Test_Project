@@ -6,6 +6,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {MaterialModule} from "../material-module/material.module";
 
 import {ShoppingCartPageComponent} from "./pages/shopping-cart-page/shopping-cart-page.component";
+import {RouterModule} from "@angular/router";
 
 const ShoppingCartComponents = [
   ShoppingCartPageComponent
@@ -18,7 +19,8 @@ const ShoppingCartComponents = [
     CommonModule,
     BrowserModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ]
 })
 export class ShoppingCartModule {

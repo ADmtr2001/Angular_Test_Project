@@ -5,7 +5,7 @@ interface Dish {
   category: string;
   description: string;
   image: string;
-  ingredients: string;
+  ingredients: string[];
 }
 
 export default Dish;

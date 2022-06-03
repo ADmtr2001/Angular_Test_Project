@@ -1,14 +1,14 @@
-<section>
+<section *ngIf="(selectedDish$ | async) as dish">
   <mat-dialog-content class="mat-typography">
     <div class="image">
-      <img src="{{selectedDish?.image}}" alt="dish">
+      <img src="{{dish?.image}}" alt="dish">
     </div>
     <div class="description">
       <div class="content">
-        <h2 class="title">{{selectedDish?.title}}</h2>
-        <p class="text"><span>Description: </span>{{selectedDish?.description}}</p>
-        <p class="text"><span>Ingredients: </span>{{selectedDish?.ingredients}}</p>
-        <p class="price">{{selectedDish?.price}}$</p>
+        <h2 class="title">{{dish?.title}}</h2>
+        <p class="text"><span>Description: </span>{{dish?.description}}</p>
+        <p class="text"><span>Ingredients: </span>{{dish?.ingredients}}</p>
+        <p class="price">{{dish?.price}}$</p>
       </div>
     </div>
   </mat-dialog-content>
@@ -18,7 +18,7 @@
       <mat-label>Amount</mat-label>
       <input type="number" matInput [formControl]="amount">
     </mat-form-field>
-    <button mat-stroked-button [mat-dialog-close]="true" (click)="addDishToCart()">Add</button>
+    <button mat-stroked-button [mat-dialog-close]="true" (click)="addDishToCart(dish)">Add</button>
     <button mat-stroked-button mat-dialog-close>Close</button>
   </mat-dialog-actions>
 </section>

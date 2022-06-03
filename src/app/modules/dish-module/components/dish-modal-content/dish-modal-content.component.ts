@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 import {FormControl} from "@angular/forms";
 import {DishesService} from "../../../../services/dishes.service";
-import {BehaviorSubject, first} from "rxjs";
+import {BehaviorSubject} from "rxjs";
 import {Dish, OrderItem} from "../../../../types";
 import {ShoppingCartService} from "../../../../services/shopping-cart.service";
 
@@ -13,22 +13,18 @@ import {ShoppingCartService} from "../../../../services/shopping-cart.service";
 })
 export class DishModalContentComponent implements OnInit {
   public amount = new FormControl('1');
-  public selectedDish: Dish | null = null;
 
-  // public selectedDish$: BehaviorSubject<Dish | null>;
+  public selectedDish$: BehaviorSubject<Dish>;
 
   constructor(private dishesService: DishesService, private shoppingCartService: ShoppingCartService) {
-    // this.selectedDish$ = this.dishesService.selectedDish$;
+    this.selectedDish$ = this.dishesService.selectedDish$;
   }
 
   ngOnInit(): void {
-    this.dishesService.selectedDish$.subscribe((dish) => this.selectedDish = dish);
   }
 
-  addDishToCart(): void {
-    if (!this.selectedDish) return;
-
-    const orderItem: OrderItem = {dish: this.selectedDish, amount: +this.amount.value};
+  addDishToCart(dish: Dish): void {
+    const orderItem: OrderItem = {dish, amount: +this.amount.value};
     this.shoppingCartService.addItem(orderItem);
   }
 }
