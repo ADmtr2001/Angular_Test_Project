@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 
 import {BrowserModule} from '@angular/platform-browser';
-import {ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from './app-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -19,13 +18,12 @@ import {FooterComponent} from './shared/footer/footer.component';
   declarations: [
     AppComponent,
     NavbarComponent,
-    FooterComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule,
     HttpClientModule,
     MaterialModule,
     DishModule,
@@ -33,10 +31,9 @@ import {FooterComponent} from './shared/footer/footer.component';
     ShoppingCartModule
   ],
   providers: [],
+  exports: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
 }
-
-// Clear modules
-// + Number()

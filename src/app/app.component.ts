@@ -7,14 +7,3 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 }
-
-// @Input() name: string = '';
-// @Output() nameChange: EventEmitter<Event> = new EventEmitter<Event>();
-// [()]
-// ViewChild
-// #variable
-// metanit
-// Generic
-// Abstract class vs interface(disapear after compilation)
-// interceptor - resolver - guard - lazy
-// methods in {{}} - bad practice

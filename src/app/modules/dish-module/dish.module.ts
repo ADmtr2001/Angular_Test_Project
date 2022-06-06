@@ -12,6 +12,7 @@ import {DishesItemComponent} from "./components/dishes-item/dishes-item.componen
 import {
   DishModalContentComponent
 } from "./components/dish-modal-content/dish-modal-content.component";
+import {FormatSelectPipe} from "../../pipes/format-select.pipe";
 
 const DishComponents = [
   DishesPageComponent,
@@ -22,13 +23,13 @@ const DishComponents = [
 ];
 
 @NgModule({
-  declarations: [DishComponents],
+  declarations: [DishComponents, FormatSelectPipe],
   exports: [DishComponents],
   imports: [
     CommonModule,
     BrowserModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ]
 })
 export class DishModule {}
