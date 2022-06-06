@@ -6,6 +6,7 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import Dish from "../types/Dish";
 import {Category} from "../types/Category";
+import {Params} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,8 @@ export class DishesService {
   constructor(private http: HttpClient) {
   }
 
-  public fetchDishes(): void {
-    this.http.get<Dish[]>(`${environment.api_url}/dish`).pipe(first()).subscribe((dishes) => this.dishes$.next(dishes));
+  public fetchDishes(queryParams: Params): void {
+    this.http.get<Dish[]>(`${environment.api_url}/dish`, {params: queryParams}).pipe(first()).subscribe((dishes) => this.dishes$.next(dishes));
   }
 
   public fetchCategories(): Observable<Category[]> {

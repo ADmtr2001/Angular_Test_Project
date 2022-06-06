@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 import {DishesService} from "../../../../services/dishes.service";
 import Dish from "../../../../types/Dish";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-dishes-list',
@@ -12,11 +13,15 @@ import Dish from "../../../../types/Dish";
 export class DishesListComponent implements OnInit {
   public dishes$: BehaviorSubject<Dish[]>;
 
-  constructor(private dishesService: DishesService) {
+  constructor(private dishesService: DishesService,
+              private router: Router,
+              private activatedRoute: ActivatedRoute) {
     this.dishes$ = this.dishesService.dishes$;
   }
 
   ngOnInit(): void {
-    this.dishesService.fetchDishes();
+    this.activatedRoute.queryParams.subscribe(res=>{
+      this.dishesService.fetchDishes(res);
+    })
   }
 }
