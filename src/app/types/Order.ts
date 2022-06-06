@@ -2,7 +2,8 @@ import Dish from "./Dish";
 
 export interface Order {
   items: OrderItem[],
-  totalPrice: number
+  totalPrice: number,
+  totalAmount: number,
 }
 
 export interface OrderItem {

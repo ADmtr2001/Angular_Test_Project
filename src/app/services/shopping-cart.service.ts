@@ -7,7 +7,7 @@ import {Order, OrderItem} from "../types/Order";
   providedIn: 'root'
 })
 export class ShoppingCartService {
-  public order$: BehaviorSubject<Order> = new BehaviorSubject<Order>({items: [], totalPrice: 0});
+  public order$: BehaviorSubject<Order> = new BehaviorSubject<Order>({items: [], totalPrice: 0, totalAmount: 0});
 
   constructor() {
   }
@@ -52,7 +52,12 @@ export class ShoppingCartService {
   }
 
   private updateOrder(orderItems: OrderItem[]) {
-    const newPrice = orderItems.reduce((acc, cur) => acc + (cur.dish.price * cur.amount), 0)
-    this.order$.next({items: orderItems, totalPrice: newPrice})
+    const total = orderItems.reduce((acc, cur) => {
+      acc.totalPrice += (cur.dish.price * cur.amount);
+      acc.totalAmount += cur.amount;
+      return acc;
+    }, {totalPrice: 0, totalAmount: 0})
+
+    this.order$.next({items: orderItems, totalPrice: total.totalPrice, totalAmount: total.totalAmount});
   }
 }
