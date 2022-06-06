@@ -6,7 +6,8 @@ import {
 } from "../dish-modal-content/dish-modal-content.component";
 
 import {DishesService} from "../../../../services/dishes.service";
-import Dish from "../../../../types/Dish";
+
+import {Dish} from "../../../../types/Dish";
 
 @Component({
   selector: 'app-dishes-item',
@@ -16,7 +17,8 @@ import Dish from "../../../../types/Dish";
 export class DishesItemComponent {
   @Input() dish!: Dish;
 
-  constructor(private dialog: MatDialog, private dishesService: DishesService) {
+  constructor(private dialog: MatDialog,
+              private dishesService: DishesService) {
   }
 
   public openDialog(): void {

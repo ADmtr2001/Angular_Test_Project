@@ -3,6 +3,7 @@ import {FormControl} from "@angular/forms";
 
 import {BehaviorSubject} from "rxjs";
 import {ShoppingCartService} from "../../../../services/shopping-cart.service";
+
 import {Order} from "../../../../types/Order";
 
 @Component({
@@ -13,6 +14,7 @@ import {Order} from "../../../../types/Order";
 export class ShoppingCartPageComponent implements OnInit {
   public order$: BehaviorSubject<Order>;
 
+  // Form Group later
   public name = new FormControl('');
   public surname = new FormControl('');
   public address = new FormControl('');

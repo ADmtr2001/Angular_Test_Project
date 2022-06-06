@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 
 import {FormControl} from "@angular/forms";
-import {DishesService} from "../../../../services/dishes.service";
 import {BehaviorSubject} from "rxjs";
+
+import {DishesService} from "../../../../services/dishes.service";
 import {ShoppingCartService} from "../../../../services/shopping-cart.service";
-import Dish from "../../../../types/Dish";
+
+import {Dish} from "../../../../types/Dish";
 import {OrderItem} from "../../../../types/Order";
 
 @Component({
@@ -24,7 +26,7 @@ export class DishModalContentComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  addDishToCart(dish: Dish): void {
+  public addDishToCart(dish: Dish): void {
     const orderItem: OrderItem = {dish, amount: +this.amount.value};
     this.shoppingCartService.addItem(orderItem);
   }

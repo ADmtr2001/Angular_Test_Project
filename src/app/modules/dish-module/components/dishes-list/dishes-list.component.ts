@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
-import {BehaviorSubject} from "rxjs";
-import {DishesService} from "../../../../services/dishes.service";
-import Dish from "../../../../types/Dish";
 import {ActivatedRoute, Router} from "@angular/router";
+import {BehaviorSubject} from "rxjs";
+
+import {DishesService} from "../../../../services/dishes.service";
+
+import {Dish} from "../../../../types/Dish";
 
 @Component({
   selector: 'app-dishes-list',

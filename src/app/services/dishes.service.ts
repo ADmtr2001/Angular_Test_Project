@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-
-import {BehaviorSubject, first, Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
-
-import {environment} from "../../environments/environment";
-import Dish from "../types/Dish";
-import {Category} from "../types/Category";
 import {Params} from "@angular/router";
+
+import {HttpClient} from "@angular/common/http";
+import {BehaviorSubject, first, Observable} from "rxjs";
+
+import {Category} from "../types/Category";
+import {Dish} from "../types/Dish";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,10 @@ export class DishesService {
   }
 
   public fetchDishes(queryParams: Params): void {
-    this.http.get<Dish[]>(`${environment.api_url}/dish`, {params: queryParams}).pipe(first()).subscribe((dishes) => this.dishes$.next(dishes));
+    this.http
+      .get<Dish[]>(`${environment.api_url}/dish`, {params: queryParams})
+      .pipe(first())
+      .subscribe((dishes) => this.dishes$.next(dishes));
   }
 
   public fetchCategories(): Observable<Category[]> {

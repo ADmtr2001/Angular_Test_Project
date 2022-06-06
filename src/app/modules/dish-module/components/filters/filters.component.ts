@@ -1,10 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-
 import {FormControl} from '@angular/forms';
-import {DishesService} from "../../../../services/dishes.service";
-import {first, Subscription} from "rxjs";
-import {Category} from "../../../../types/Category";
 import {ActivatedRoute, Router} from "@angular/router";
+
+import {first, Subscription} from "rxjs";
+import {DishesService} from "../../../../services/dishes.service";
+
+import {Category} from "../../../../types/Category";
 
 @Component({
   selector: 'app-filters',
@@ -12,12 +13,12 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrls: ['./filters.component.scss']
 })
 export class FiltersComponent implements OnInit, OnDestroy {
-  public searchQuery = new FormControl('');
-
   public categories: Category[] = [];
 
+  public searchQuery = new FormControl('');
   public selectedCategory = new FormControl('');
-  private selectedCategorySubscription!: Subscription;
+
+  private selectedCategorySubscription$!: Subscription;
 
   constructor(private dishesService: DishesService,
               private router: Router,
@@ -27,7 +28,7 @@ export class FiltersComponent implements OnInit, OnDestroy {
     // Как правильно сделать All категорию.
     this.dishesService.fetchCategories().pipe(first()).subscribe((categories) => this.categories = [{_id: '', name: 'All'}, ...categories]);
 
-    this.selectedCategorySubscription = this.selectedCategory.valueChanges.subscribe((value) => {
+    this.selectedCategorySubscription$ = this.selectedCategory.valueChanges.subscribe((value) => {
        this.router.navigate(
         [],
         {
@@ -39,6 +40,7 @@ export class FiltersComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.selectedCategorySubscription.unsubscribe();
+    // Есть ли способ получше, чтобы отписаться?
+    this.selectedCategorySubscription$.unsubscribe();
   }
 }

@@ -7,5 +7,3 @@ export interface Dish {
   image: string;
   ingredients: string[];
 }
-
-export default Dish;
