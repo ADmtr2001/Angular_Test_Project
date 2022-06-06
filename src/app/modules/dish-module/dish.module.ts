@@ -1,7 +1,6 @@
 import {NgModule} from "@angular/core";
 
 import {CommonModule} from "@angular/common";
-import {BrowserModule} from "@angular/platform-browser";
 import {MaterialModule} from "../material-module/material.module";
 import {FiltersComponent} from "./components/filters/filters.component";
 import {ReactiveFormsModule} from "@angular/forms";
@@ -11,8 +10,9 @@ import {DishesListComponent} from "./components/dishes-list/dishes-list.componen
 import {DishesItemComponent} from "./components/dishes-item/dishes-item.component";
 import {
   DishModalContentComponent
-} from "./components/dish-modal-content/dish-modal-content.component";
+} from "../../shared/dish-modal-content/dish-modal-content.component";
 import {FormatSelectPipe} from "../../pipes/format-select.pipe";
+import {DishRoutingModule} from "./dish-routing.module";
 
 const DishComponents = [
   DishesPageComponent,
@@ -27,9 +27,9 @@ const DishComponents = [
   exports: [DishComponents],
   imports: [
     CommonModule,
-    BrowserModule,
     MaterialModule,
     ReactiveFormsModule,
+    DishRoutingModule
   ]
 })
 export class DishModule {}

@@ -1,9 +1,5 @@
 import {Component, Input} from '@angular/core';
-
-import {MatDialog} from "@angular/material/dialog";
-import {
-  DishModalContentComponent
-} from "../dish-modal-content/dish-modal-content.component";
+import {DishModalContentComponent} from "../../../../shared/dish-modal-content/dish-modal-content.component";
 
 import {DishesService} from "../../../../services/dishes.service";
 
@@ -17,15 +13,12 @@ import {Dish} from "../../../../types/Dish";
 export class DishesItemComponent {
   @Input() dish!: Dish;
 
-  constructor(private dialog: MatDialog,
-              private dishesService: DishesService) {
+  // Это же все равно не считается dump component из-за сервиса?
+  // Нужно было бы передать ивентов вверх?
+  constructor(private dishesService: DishesService) {
   }
 
   public openDialog(): void {
-    this.dishesService.setSelectedDish(this.dish)
-
-    const dialogRef = this.dialog.open(DishModalContentComponent, {
-      width: '80rem',
-    });
+    this.dishesService.openDishDialog(DishModalContentComponent, this.dish);
   }
 }

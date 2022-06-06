@@ -1,0 +1,46 @@
+<div class="cart-info">
+  <h2 class="title">Your Order</h2>
+
+  <div class="empty-message" *ngIf="order.items.length === 0">
+    <mat-divider></mat-divider>
+    <p>You order list is currently empty</p>
+    <button mat-stroked-button [routerLink]="'/'">Search Dishes</button>
+  </div>
+
+  <div class="items-list">
+    <article class="item" *ngFor="let item of order.items">
+
+      <div class="image">
+        <img src="{{item.dish.image}}" alt="">
+      </div>
+
+      <div class="info">
+        <h3 class="item-title">{{item.dish.title}}</h3>
+        <p class="price">{{item.dish.price * item.amount}}$</p>
+        <div class="action-buttons">
+          <button mat-stroked-button (click)="increaseItemAmount(item.dish._id)">
+            <mat-icon>add</mat-icon>
+          </button>
+          <p>{{item.amount}}</p>
+          <button mat-stroked-button (click)="decreaseItemAmount(item.dish._id)">
+            <mat-icon>remove</mat-icon>
+          </button>
+          <button
+            mat-stroked-button
+            color="warn"
+            class="remove-btn"
+            (click)="removeCartItem(item.dish._id)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+
+    </article>
+  </div>
+
+  <div class="total" *ngIf="order.items.length !== 0">
+    <mat-divider></mat-divider>
+    <p>Total: {{order.totalPrice}}$</p>
+  </div>
+</div>

@@ -1,9 +1,7 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {ActivatedRoute, Router} from "@angular/router";
 
-import {first, Subscription} from "rxjs";
-import {DishesService} from "../../../../services/dishes.service";
+import {Subject, takeUntil} from "rxjs";
 
 import {Category} from "../../../../types/Category";
 
@@ -13,34 +11,28 @@ import {Category} from "../../../../types/Category";
   styleUrls: ['./filters.component.scss']
 })
 export class FiltersComponent implements OnInit, OnDestroy {
-  public categories: Category[] = [];
+  @Input() categories: Category[] = [];
+  @Input() currentCategoryValue: string = '';
 
+  @Output() categoryChange = new EventEmitter<string>();
+  // FormBuilder
   public searchQuery = new FormControl('');
-  public selectedCategory = new FormControl('');
+  public selectedCategory = new FormControl(this.currentCategoryValue);
 
-  private selectedCategorySubscription$!: Subscription;
+  private destroy$: Subject<void> = new Subject<void>();
 
-  constructor(private dishesService: DishesService,
-              private router: Router,
-              private activatedRoute: ActivatedRoute) { }
-
-  ngOnInit(): void {
-    // Как правильно сделать All категорию.
-    this.dishesService.fetchCategories().pipe(first()).subscribe((categories) => this.categories = [{_id: '', name: 'All'}, ...categories]);
-
-    this.selectedCategorySubscription$ = this.selectedCategory.valueChanges.subscribe((value) => {
-       this.router.navigate(
-        [],
-        {
-          relativeTo: this.activatedRoute,
-          queryParams: value ? {category: value} : {category: null},
-          queryParamsHandling: 'merge',
-        });
-    });
+  constructor() {
   }
 
-  ngOnDestroy() {
-    // Есть ли способ получше, чтобы отписаться?
-    this.selectedCategorySubscription$.unsubscribe();
+  ngOnInit(): void {
+    this.selectedCategory.setValue(this.currentCategoryValue);
+    this.selectedCategory.valueChanges
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((value) => this.categoryChange.emit(value));
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

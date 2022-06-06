@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 
 import {FormControl} from "@angular/forms";
 
@@ -7,17 +7,15 @@ import {FormControl} from "@angular/forms";
   templateUrl: './auth-page.component.html',
   styleUrls: ['./auth-page.component.scss']
 })
-export class AuthPageComponent implements OnInit {
+export class AuthPageComponent {
   public isSignUpForm = true;
 
+  // 2 different forms with ng-template
   public email = new FormControl('');
   public password = new FormControl('');
   public passwordConfirm = new FormControl('');
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
   public toggleForm(): void {
     this.isSignUpForm = !this.isSignUpForm;

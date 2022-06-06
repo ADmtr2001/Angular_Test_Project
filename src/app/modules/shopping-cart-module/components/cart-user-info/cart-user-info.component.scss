@@ -1,0 +1,16 @@
+.user-info {
+  padding: 1rem;
+
+  box-shadow: 0.3rem 0.3rem 1rem 0.1rem rgba(0, 0, 0, 0.15);
+
+  form {
+    .example-full-width {
+      width: 100%;
+    }
+
+    button {
+      display: block;
+      margin-left: auto;
+    }
+  }
+}

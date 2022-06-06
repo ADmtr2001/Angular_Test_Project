@@ -4,8 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'formatSelect'
 })
 export class FormatSelectPipe implements PipeTransform {
-  // Не уверен что нужно ставить any. Я конечно могу захотитеть использовать её ещё где-то.
-  transform(value: string, options: any[]): string {
+  transform<T extends {_id: string, name: string}>(value: string, options: T[]): string {
     return options.find((option) => option._id === value)?.name || '';
   }
 }

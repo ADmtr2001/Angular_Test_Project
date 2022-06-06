@@ -1,6 +1,6 @@
 <section>
   <mat-grid-list cols="4" gutterSize="2rem">
-    <mat-grid-tile *ngFor="let dish of (dishes$ | async)">
+    <mat-grid-tile *ngFor="let dish of dishes">
       <app-dishes-item [dish]="dish"></app-dishes-item>
     </mat-grid-tile>
   </mat-grid-list>

@@ -2,14 +2,11 @@ import {NgModule} from '@angular/core';
 
 import {RouterModule, Routes} from '@angular/router';
 
-import {DishesPageComponent} from "./modules/dish-module/pages/dishes-page/dishes-page.component";
-import {ShoppingCartPageComponent} from "./modules/shopping-cart-module/pages/shopping-cart-page/shopping-cart-page.component";
-import {AuthPageComponent} from "./modules/auth-module/pages/auth-page/auth-page.component";
-
 const routes: Routes = [
-  {path: '', component: DishesPageComponent},
-  {path: 'shopping-cart', component: ShoppingCartPageComponent},
-  {path: 'auth', component: AuthPageComponent}
+  {path: '', pathMatch: 'full', loadChildren: () => import('./modules/dish-module/dish.module').then((m) => m.DishModule)},
+  {path: 'shopping-cart', loadChildren: () => import('./modules/shopping-cart-module/shopping-cart.module').then((m) => m.ShoppingCartModule)},
+  {path: 'auth', loadChildren: () => import('./modules/auth-module/auth.module').then((m) => m.AuthModule)},
+  {path: ':category', loadChildren: () => import('./modules/dish-module/dish.module').then((m) => m.DishModule)},
 ];
 
 @NgModule({

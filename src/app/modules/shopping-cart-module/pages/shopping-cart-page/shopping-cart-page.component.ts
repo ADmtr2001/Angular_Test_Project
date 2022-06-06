@@ -1,5 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl} from "@angular/forms";
+import {Component} from '@angular/core';
 
 import {BehaviorSubject} from "rxjs";
 import {ShoppingCartService} from "../../../../services/shopping-cart.service";
@@ -11,20 +10,11 @@ import {Order} from "../../../../types/Order";
   templateUrl: './shopping-cart-page.component.html',
   styleUrls: ['./shopping-cart-page.component.scss']
 })
-export class ShoppingCartPageComponent implements OnInit {
+export class ShoppingCartPageComponent {
   public order$: BehaviorSubject<Order>;
-
-  // Form Group later
-  public name = new FormControl('');
-  public surname = new FormControl('');
-  public address = new FormControl('');
-  public phoneNumber = new FormControl('')
 
   constructor(private shoppingCartService: ShoppingCartService) {
     this.order$ = shoppingCartService.order$;
-  }
-
-  ngOnInit(): void {
   }
 
   public removeCartItem(id: string): void {

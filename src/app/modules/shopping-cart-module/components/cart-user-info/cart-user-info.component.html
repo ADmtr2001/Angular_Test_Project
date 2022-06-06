@@ -1,0 +1,21 @@
+<div class="user-info">
+  <form>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput [formControl]="name">
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Surname</mat-label>
+      <input matInput [formControl]="surname">
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Address</mat-label>
+      <input matInput [formControl]="address">
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Phone Number</mat-label>
+      <input type="tel" matInput [formControl]="phoneNumber">
+    </mat-form-field>
+    <button mat-stroked-button>Confirm</button>
+  </form>
+</div>
