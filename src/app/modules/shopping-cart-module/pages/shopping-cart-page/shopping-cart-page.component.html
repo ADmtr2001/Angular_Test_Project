@@ -1,7 +1,11 @@
-<section>
-  <app-cart-user-info></app-cart-user-info>
+<section *ngIf="(order$ | async) as order">
+  <app-cart-user-info
+    [order]="order || {items: [], totalPrice: 0, totalAmount: 0}"
+    [form]="userInfoForm"
+    (formSubmit)="onSubmit($event)"
+  ></app-cart-user-info>
   <app-cart-dishes-list
-    [order]="(order$ | async) || {items: [], totalPrice: 0, totalAmount: 0}"
+    [order]="order || {items: [], totalPrice: 0, totalAmount: 0}"
     (increaseAmount)="increaseItemAmount($event)"
     (decreaseAmount)="decreaseItemAmount($event)"
     (removeItem)="removeCartItem($event)"

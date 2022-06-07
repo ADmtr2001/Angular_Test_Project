@@ -6,7 +6,14 @@
   <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" [routerLink]="'/shopping-cart'">
     <mat-icon [matBadge]="(order$ | async)?.totalAmount" matBadgeColor="warn">shopping_cart</mat-icon>
   </button>
-  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" [routerLink]="'/auth'">
+  <button
+    mat-icon-button
+    class="example-icon favorite-icon"
+    aria-label="Example icon-button with heart icon"
+    [routerLink]="'/auth'"
+    (click)="logout()"
+    *ngIf="(user$ | async)"
+  >
     <mat-icon>logout</mat-icon>
   </button>
 </mat-toolbar>

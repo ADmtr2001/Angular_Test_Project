@@ -1,21 +1,26 @@
 <div class="user-info">
-  <form>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Name</mat-label>
-      <input matInput [formControl]="name">
+      <input matInput formControlName="name">
     </mat-form-field>
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Surname</mat-label>
-      <input matInput [formControl]="surname">
+      <input matInput formControlName="surname">
     </mat-form-field>
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Address</mat-label>
-      <input matInput [formControl]="address">
+      <input matInput formControlName="address">
     </mat-form-field>
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Phone Number</mat-label>
-      <input type="tel" matInput [formControl]="phoneNumber">
+      <input type="tel" matInput formControlName="phoneNumber">
     </mat-form-field>
-    <button mat-stroked-button>Confirm</button>
+    <button
+      mat-stroked-button
+      [disabled]="order.items.length === 0 || !form.valid"
+    >
+      Confirm
+    </button>
   </form>
 </div>

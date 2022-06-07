@@ -1,17 +1,42 @@
 <section>
-  <form>
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Email</mat-label>
-      <input type="email" matInput [formControl]="email">
-    </mat-form-field>
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Password</mat-label>
-      <input type="password" matInput [formControl]="password">
-    </mat-form-field>
-    <mat-form-field class="example-full-width" appearance="fill" *ngIf="isSignUpForm">
-      <mat-label>Confirm Password</mat-label>
-      <input type="password" matInput [formControl]="passwordConfirm">
-    </mat-form-field>
-  </form>
+
+  <ng-container *ngIf="isSignUpForm; then register; else login"></ng-container>
+
+  <ng-template #register>
+    <form [formGroup]="registerForm" (ngSubmit)="submitRegisterForm()" novalidate>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput name="name" formControlName="name">
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput name="email" formControlName="email">
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput name="password" formControlName="password">
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="fill" *ngIf="isSignUpForm">
+        <mat-label>Confirm Password</mat-label>
+        <input type="password" matInput name="confirmPassword" formControlName="passwordConfirm">
+      </mat-form-field>
+      <button mat-stroked-button [disabled]="!registerForm.valid">Sign Up</button>
+    </form>
+  </ng-template>
+
+  <ng-template #login>
+    <form [formGroup]="loginForm" (ngSubmit)="submitLoginForm()" novalidate>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput name="email" formControlName="email">
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput name="password" formControlName="password">
+      </mat-form-field>
+      <button mat-stroked-button [disabled]="!loginForm.valid">Login</button>
+    </form>
+  </ng-template>
+
   <button (click)="toggleForm()">{{isSignUpForm ? 'Already have an account? Login' : "Don't have an account? Signup"}}</button>
 </section>

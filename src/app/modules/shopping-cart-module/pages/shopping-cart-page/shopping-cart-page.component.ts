@@ -4,6 +4,8 @@ import {BehaviorSubject} from "rxjs";
 import {ShoppingCartService} from "../../../../services/shopping-cart.service";
 
 import {Order} from "../../../../types/Order";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {UserInfoFormData} from "../../../../types/UserInfoFormData";
 
 @Component({
   selector: 'app-shopping-cart-page',
@@ -13,7 +15,14 @@ import {Order} from "../../../../types/Order";
 export class ShoppingCartPageComponent {
   public order$: BehaviorSubject<Order>;
 
-  constructor(private shoppingCartService: ShoppingCartService) {
+  public userInfoForm: FormGroup = this.formBuilder.group({
+    "name": ["", [Validators.required]],
+    "surname": ["", [Validators.required]],
+    "address": ["", [Validators.required]],
+    "phoneNumber": ["", [Validators.required]],
+  });
+
+  constructor(private shoppingCartService: ShoppingCartService, private formBuilder: FormBuilder) {
     this.order$ = shoppingCartService.order$;
   }
 
@@ -27,5 +36,9 @@ export class ShoppingCartPageComponent {
 
   public decreaseItemAmount(id: string): void {
     this.shoppingCartService.decreaseAmount(id);
+  }
+
+  public onSubmit(userInfo: UserInfoFormData): void {
+    this.shoppingCartService.makeOrder(userInfo)
   }
 }

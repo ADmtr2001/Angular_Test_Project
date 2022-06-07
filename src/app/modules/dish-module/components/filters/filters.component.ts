@@ -24,14 +24,14 @@ export class FiltersComponent implements OnInit, OnDestroy {
   constructor() {
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.selectedCategory.setValue(this.currentCategoryValue);
     this.selectedCategory.valueChanges
       .pipe(takeUntil(this.destroy$))
       .subscribe((value) => this.categoryChange.emit(value));
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }

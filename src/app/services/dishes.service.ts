@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Params} from "@angular/router";
 
 import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject, first, Observable} from "rxjs";
+import {BehaviorSubject, finalize, first, Observable} from "rxjs";
 
 import {Category} from "../types/Category";
 import {Dish} from "../types/Dish";
@@ -14,8 +14,10 @@ import {MatDialog} from "@angular/material/dialog";
   providedIn: 'root'
 })
 export class DishesService {
-  public dishes$: BehaviorSubject<Dish[]> = new BehaviorSubject<Dish[]>([]);
+  private dishesSubj$: BehaviorSubject<Dish[]> = new BehaviorSubject<Dish[]>([]);
+  public dishes$: Observable<Dish[]> = this.dishesSubj$.asObservable();
   public selectedDish$: BehaviorSubject<Dish> = new BehaviorSubject<Dish>({} as Dish);
+  // isLoading
 
   constructor(private http: HttpClient, private dialog: MatDialog) {
   }
@@ -24,7 +26,7 @@ export class DishesService {
     this.http
       .get<Dish[]>(`${environment.api_url}/dish`, {params: queryParams})
       .pipe(first())
-      .subscribe((dishes) => this.dishes$.next(dishes));
+      .subscribe((dishes) => this.dishesSubj$.next(dishes));
   }
 
   public fetchCategories(): Observable<Category[]> {

@@ -1,6 +1,11 @@
 import {Component} from '@angular/core';
 
-import {FormControl} from "@angular/forms";
+import {
+  FormBuilder, FormGroup,
+  Validators
+} from "@angular/forms";
+import {AuthService} from "../../../../services/auth.service";
+import {createConfirmPasswordValidator} from "../../validators/confirmPasswordValidation";
 
 @Component({
   selector: 'app-auth-page',
@@ -10,14 +15,41 @@ import {FormControl} from "@angular/forms";
 export class AuthPageComponent {
   public isSignUpForm = true;
 
-  // 2 different forms with ng-template
-  public email = new FormControl('');
-  public password = new FormControl('');
-  public passwordConfirm = new FormControl('');
+  public registerForm: FormGroup = this.formBuilder.group({
+    "name": ["", [Validators.required]],
+    "email": ["", [Validators.required, Validators.email]],
+    "password": ["", [
+      Validators.required,
+      Validators.minLength(6),
+      Validators.maxLength(20)]
+    ],
+    "passwordConfirm": ["", [Validators.required]],
+  }, {
+    validators: [createConfirmPasswordValidator()]
+  });
 
-  constructor() { }
+  public loginForm: FormGroup = this.formBuilder.group({
+    "email": ["", [Validators.required, Validators.email]],
+    "password": ["", [
+      Validators.required,
+      Validators.minLength(6),
+      Validators.maxLength(20)]
+    ]
+  });
+
+  constructor(private formBuilder: FormBuilder, private authService: AuthService) {
+  }
 
   public toggleForm(): void {
     this.isSignUpForm = !this.isSignUpForm;
+  }
+
+  public submitRegisterForm(): void {
+    const {name, email, password} = this.registerForm.value;
+    return this.authService.register({name, email, password});
+  }
+
+  public submitLoginForm(): void{
+    this.authService.login(this.loginForm.value);
   }
 }

@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DishesService} from "../../../../services/dishes.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {BehaviorSubject, first, Subject, takeUntil} from "rxjs";
+import {BehaviorSubject, first, Observable, Subject, takeUntil, tap} from "rxjs";
 import {Category} from "../../../../types/Category";
 import {Dish} from "../../../../types/Dish";
 
@@ -14,16 +14,18 @@ export class DishesPageComponent implements OnInit, OnDestroy {
   public categories: Category[] = [];
   public currentCategoryValue: string = '';
 
-  public dishes$: BehaviorSubject<Dish[]>;
+  public dishes$: Observable<Dish[]>;
   private destroy$: Subject<void> = new Subject<void>();
 
   constructor(private dishesService: DishesService,
               private router: Router,
               private activatedRoute: ActivatedRoute) {
-    this.dishes$ = this.dishesService.dishes$;
+    this.dishes$ = this.dishesService.dishes$.pipe(tap((dishes) => {
+      if (!dishes) console.log('hide')
+    }));
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.dishesService
       .fetchCategories()
       .pipe(first())
@@ -35,7 +37,7 @@ export class DishesPageComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }

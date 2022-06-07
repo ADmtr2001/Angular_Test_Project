@@ -22,6 +22,14 @@ section {
     .example-full-width {
       width: 100%;
     }
+
+    button {
+      display: block;
+      margin-left: auto;
+
+      color: white;
+      border-color: white;
+    }
   }
 
   > button {

@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import {FormControl} from "@angular/forms";
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {FormGroup} from "@angular/forms";
+import {Order} from "../../../../types/Order";
+import {UserInfoFormData} from "../../../../types/UserInfoFormData";
 
 @Component({
   selector: 'app-cart-user-info',
@@ -7,11 +9,14 @@ import {FormControl} from "@angular/forms";
   styleUrls: ['./cart-user-info.component.scss']
 })
 export class CartUserInfoComponent {
-  // Form Group later
-  public name = new FormControl('');
-  public surname = new FormControl('');
-  public address = new FormControl('');
-  public phoneNumber = new FormControl('')
+  @Input() order!: Order;
+  @Input() form!: FormGroup;
+
+  @Output() formSubmit: EventEmitter<UserInfoFormData> = new EventEmitter<UserInfoFormData>()
 
   constructor() { }
+
+  public onSubmit(): void {
+    this.formSubmit.emit(this.form.value);
+  }
 }

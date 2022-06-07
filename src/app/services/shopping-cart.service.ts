@@ -1,8 +1,12 @@
 import {Injectable} from '@angular/core';
 
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, first} from "rxjs";
 
 import {Order, OrderItem} from "../types/Order";
+import {Dish} from "../types/Dish";
+import {environment} from "../../environments/environment";
+import {HttpClient} from "@angular/common/http";
+import {UserInfoFormData} from "../types/UserInfoFormData";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +14,7 @@ import {Order, OrderItem} from "../types/Order";
 export class ShoppingCartService {
   public order$: BehaviorSubject<Order> = new BehaviorSubject<Order>({items: [], totalPrice: 0, totalAmount: 0});
 
-  constructor() {
+  constructor(private http: HttpClient) {
   }
 
   public addItem(newItem: OrderItem): void {
@@ -50,6 +54,13 @@ export class ShoppingCartService {
     });
 
     this.updateOrder(newItems);
+  }
+
+  public makeOrder(userInfo: UserInfoFormData): void {
+    this.http
+      .post<Dish[]>(`${environment.api_url}/order`, {order: this.order$.getValue(), userInfo})
+      .pipe(first())
+      .subscribe((data) => console.log(data));
   }
 
   private updateOrder(orderItems: OrderItem[]) {
