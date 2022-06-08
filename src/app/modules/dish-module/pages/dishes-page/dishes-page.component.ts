@@ -2,8 +2,8 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DishesService} from "../../../../services/dishes.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {BehaviorSubject, first, Observable, Subject, takeUntil, tap} from "rxjs";
-import {Category} from "../../../../types/Category";
-import {Dish} from "../../../../types/Dish";
+import {Category} from "../../../../types/Dishes/Category";
+import {Dish} from "../../../../types/Dishes/Dish";
 
 @Component({
   selector: 'app-dishes-page',
@@ -15,14 +15,14 @@ export class DishesPageComponent implements OnInit, OnDestroy {
   public currentCategoryValue: string = '';
 
   public dishes$: Observable<Dish[]>;
+  public isDishesLoading$: Observable<boolean>;
   private destroy$: Subject<void> = new Subject<void>();
 
   constructor(private dishesService: DishesService,
               private router: Router,
               private activatedRoute: ActivatedRoute) {
-    this.dishes$ = this.dishesService.dishes$.pipe(tap((dishes) => {
-      if (!dishes) console.log('hide')
-    }));
+    this.dishes$ = this.dishesService.dishes$;
+    this.isDishesLoading$ = this.dishesService.isDishesLoading$;
   }
 
   public ngOnInit(): void {

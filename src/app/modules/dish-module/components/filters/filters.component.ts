@@ -3,7 +3,7 @@ import {FormControl} from '@angular/forms';
 
 import {Subject, takeUntil} from "rxjs";
 
-import {Category} from "../../../../types/Category";
+import {Category} from "../../../../types/Dishes/Category";
 
 @Component({
   selector: 'app-filters',

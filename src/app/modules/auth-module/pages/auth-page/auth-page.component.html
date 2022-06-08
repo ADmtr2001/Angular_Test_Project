@@ -8,18 +8,34 @@
         <mat-label>Name</mat-label>
         <input matInput name="name" formControlName="name">
       </mat-form-field>
+      <div class="name-error error">
+        <p *ngIf="regNameControl?.touched && regNameControl?.hasError('required')">This field is required!</p>
+      </div>
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Email</mat-label>
         <input type="email" matInput name="email" formControlName="email">
       </mat-form-field>
+      <div class="email-error error">
+        <p *ngIf="regEmailControl?.touched && regEmailControl?.hasError('required')">This field is required!</p>
+        <p *ngIf="regEmailControl?.touched && regEmailControl?.hasError('email')">Provide a valid email!</p>
+      </div>
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Password</mat-label>
         <input type="password" matInput name="password" formControlName="password">
       </mat-form-field>
+      <div class="password-error error">
+        <p *ngIf="regPasswordControl?.touched && regPasswordControl?.hasError('required')">This field is required!</p>
+        <p *ngIf="regPasswordControl?.touched && regPasswordControl?.hasError('minlength')">Min password length: 6!</p>
+        <p *ngIf="regPasswordControl?.touched && regPasswordControl?.hasError('maxlength')">Max password length: 20!</p>
+      </div>
       <mat-form-field class="example-full-width" appearance="fill" *ngIf="isSignUpForm">
         <mat-label>Confirm Password</mat-label>
         <input type="password" matInput name="confirmPassword" formControlName="passwordConfirm">
       </mat-form-field>
+      <div class="password-confirm-error error">
+        <p *ngIf="regPasswordConfControl?.touched && regPasswordConfControl?.hasError('required')">This field is required!</p>
+        <p *ngIf="regPasswordConfControl?.touched && regPasswordConfControl?.hasError('passwordConfirm')">Passwords don't match!</p>
+      </div>
       <button mat-stroked-button [disabled]="!registerForm.valid">Sign Up</button>
     </form>
   </ng-template>
@@ -30,10 +46,19 @@
         <mat-label>Email</mat-label>
         <input type="email" matInput name="email" formControlName="email">
       </mat-form-field>
+      <div class="email-error error">
+        <p *ngIf="logEmailControl?.touched && logEmailControl?.hasError('required')">This field is required!</p>
+        <p *ngIf="logEmailControl?.touched && logEmailControl?.hasError('email')">Provide a valid email!</p>
+      </div>
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Password</mat-label>
         <input type="password" matInput name="password" formControlName="password">
       </mat-form-field>
+      <div class="password-error error">
+        <p *ngIf="logPasswordControl?.touched && logPasswordControl?.hasError('required')">This field is required!</p>
+        <p *ngIf="logPasswordControl?.touched && logPasswordControl?.hasError('minlength')">Min password length: 6!</p>
+        <p *ngIf="logPasswordControl?.touched && logPasswordControl?.hasError('maxlength')">Max password length: 20!</p>
+      </div>
       <button mat-stroked-button [disabled]="!loginForm.valid">Login</button>
     </form>
   </ng-template>

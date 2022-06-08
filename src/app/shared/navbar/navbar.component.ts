@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {ShoppingCartService} from "../../services/shopping-cart.service";
-import {BehaviorSubject} from "rxjs";
-import {Order} from "../../types/Order";
+import {Observable} from "rxjs";
+import {Order} from "../../types/Order/Order";
 import {AuthService} from "../../services/auth.service";
-import {User} from "../../types/User";
+import {User} from "../../types/Auth/User";
 
 @Component({
   selector: 'app-navbar',
@@ -11,8 +11,8 @@ import {User} from "../../types/User";
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-  public order$: BehaviorSubject<Order>;
-  public user$: BehaviorSubject<User | null>;
+  public order$: Observable<Order>;
+  public user$: Observable<User | null>;
 
   constructor(private shoppingCartService: ShoppingCartService, private authService: AuthService) {
     this.order$ = shoppingCartService.order$;

@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {FormGroup} from "@angular/forms";
-import {Order} from "../../../../types/Order";
-import {UserInfoFormData} from "../../../../types/UserInfoFormData";
+import {AbstractControl, FormGroup} from "@angular/forms";
+import {Order} from "../../../../types/Order/Order";
 
 @Component({
   selector: 'app-cart-user-info',
@@ -11,12 +10,16 @@ import {UserInfoFormData} from "../../../../types/UserInfoFormData";
 export class CartUserInfoComponent {
   @Input() order!: Order;
   @Input() form!: FormGroup;
+  public get nameControl(): AbstractControl | null {return this.form.get('name')};
+  public get surnameControl(): AbstractControl | null {return this.form.get('surname')};
+  public get addressControl(): AbstractControl | null {return this.form.get('address')};
+  public get phoneNumberControl(): AbstractControl | null {return this.form.get('phoneNumber')};
 
-  @Output() formSubmit: EventEmitter<UserInfoFormData> = new EventEmitter<UserInfoFormData>()
+  @Output() formSubmit: EventEmitter<void> = new EventEmitter<void>()
 
   constructor() { }
 
   public onSubmit(): void {
-    this.formSubmit.emit(this.form.value);
+    this.formSubmit.emit();
   }
 }

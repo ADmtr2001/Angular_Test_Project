@@ -1,9 +1,6 @@
 import {Component} from '@angular/core';
 
-import {
-  FormBuilder, FormGroup,
-  Validators
-} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../../../services/auth.service";
 import {createConfirmPasswordValidator} from "../../validators/confirmPasswordValidation";
 
@@ -23,10 +20,14 @@ export class AuthPageComponent {
       Validators.minLength(6),
       Validators.maxLength(20)]
     ],
-    "passwordConfirm": ["", [Validators.required]],
+    "passwordConfirm": [""],
   }, {
     validators: [createConfirmPasswordValidator()]
   });
+  public get regNameControl(): AbstractControl | null {return this.registerForm.get('name')};
+  public get regEmailControl(): AbstractControl | null {return this.registerForm.get('email')};
+  public get regPasswordControl(): AbstractControl | null {return this.registerForm.get('password')};
+  public get regPasswordConfControl(): AbstractControl | null {return this.registerForm.get('passwordConfirm')};
 
   public loginForm: FormGroup = this.formBuilder.group({
     "email": ["", [Validators.required, Validators.email]],
@@ -36,6 +37,8 @@ export class AuthPageComponent {
       Validators.maxLength(20)]
     ]
   });
+  public get logEmailControl(): AbstractControl | null {return this.loginForm.get('email')};
+  public get logPasswordControl(): AbstractControl | null {return this.loginForm.get('password')};
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService) {
   }

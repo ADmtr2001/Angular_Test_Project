@@ -15,7 +15,6 @@ export class AppComponent implements OnInit{
   public ngOnInit(): void {
     this.authService.checkAuth().pipe(first()).subscribe((data) => {
       this.authService.setUser(data);
-      this.router.navigate(['']);
     });
   }
 }

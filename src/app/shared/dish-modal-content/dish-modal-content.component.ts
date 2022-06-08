@@ -6,8 +6,8 @@ import {BehaviorSubject} from "rxjs";
 import {DishesService} from "../../services/dishes.service";
 import {ShoppingCartService} from "../../services/shopping-cart.service";
 
-import {Dish} from "../../types/Dish";
-import {OrderItem} from "../../types/Order";
+import {Dish} from "../../types/Dishes/Dish";
+import {OrderItem} from "../../types/Order/Order";
 
 @Component({
   selector: 'app-dish-modal-content',

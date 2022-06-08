@@ -1,7 +1,10 @@
 <section>
-  <mat-grid-list cols="4" gutterSize="2rem">
-    <mat-grid-tile *ngFor="let dish of dishes">
-      <app-dishes-item [dish]="dish"></app-dishes-item>
-    </mat-grid-tile>
-  </mat-grid-list>
+  <app-loader *ngIf="isDishesLoading; else list"></app-loader>
+  <ng-template #list>
+    <mat-grid-list cols="4" gutterSize="2rem" rowHeight="1:1.25">
+      <mat-grid-tile *ngFor="let dish of dishes">
+        <app-dishes-item [dish]="dish"></app-dishes-item>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </ng-template>
 </section>

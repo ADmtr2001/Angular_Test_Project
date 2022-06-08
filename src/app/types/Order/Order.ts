@@ -1,4 +1,4 @@
-import {Dish} from "./Dish";
+import {Dish} from "../Dishes/Dish";
 
 export interface Order {
   items: OrderItem[],

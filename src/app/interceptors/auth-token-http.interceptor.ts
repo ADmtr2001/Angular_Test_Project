@@ -15,12 +15,13 @@ export class AuthTokenHttpInterceptor implements HttpInterceptor {
   }
 
   intercept(httpRequest: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    // 401
     return next
       .handle(this.addAuthToken(httpRequest))
       .pipe(catchError((error) => {
       if (error.status === 500) this.authService.logout();
 
-      return throwError('Not Authorized')
+      return throwError(() => 'Not Authorized')
     }));
   }
 

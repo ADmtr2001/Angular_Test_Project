@@ -2,7 +2,7 @@
   <app-cart-user-info
     [order]="order || {items: [], totalPrice: 0, totalAmount: 0}"
     [form]="userInfoForm"
-    (formSubmit)="onSubmit($event)"
+    (formSubmit)="onSubmit()"
   ></app-cart-user-info>
   <app-cart-dishes-list
     [order]="order || {items: [], totalPrice: 0, totalAmount: 0}"

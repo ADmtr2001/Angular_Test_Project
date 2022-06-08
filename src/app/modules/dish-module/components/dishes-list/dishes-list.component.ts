@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 
-import {Dish} from "../../../../types/Dish";
+import {Dish} from "../../../../types/Dishes/Dish";
 
 @Component({
   selector: 'app-dishes-list',
@@ -9,6 +9,7 @@ import {Dish} from "../../../../types/Dish";
 })
 export class DishesListComponent {
   @Input() dishes: Dish[] = [];
+  @Input() isDishesLoading!: boolean;
 
   constructor() {
   }

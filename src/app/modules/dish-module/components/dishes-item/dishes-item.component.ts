@@ -3,7 +3,7 @@ import {DishModalContentComponent} from "../../../../shared/dish-modal-content/d
 
 import {DishesService} from "../../../../services/dishes.service";
 
-import {Dish} from "../../../../types/Dish";
+import {Dish} from "../../../../types/Dishes/Dish";
 
 @Component({
   selector: 'app-dishes-item',

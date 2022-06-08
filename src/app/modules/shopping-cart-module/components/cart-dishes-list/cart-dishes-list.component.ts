@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Order} from "../../../../types/Order";
+import {Order} from "../../../../types/Order/Order";
 
 @Component({
   selector: 'app-cart-dishes-list',

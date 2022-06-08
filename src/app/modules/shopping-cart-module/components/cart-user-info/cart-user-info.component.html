@@ -4,18 +4,30 @@
       <mat-label>Name</mat-label>
       <input matInput formControlName="name">
     </mat-form-field>
+    <div class="name-error error">
+      <p *ngIf="nameControl?.touched && nameControl?.hasError('required')">This field is required!</p>
+    </div>
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Surname</mat-label>
       <input matInput formControlName="surname">
     </mat-form-field>
+    <div class="name-error error">
+      <p *ngIf="surnameControl?.touched && surnameControl?.hasError('required')">This field is required!</p>
+    </div>
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Address</mat-label>
       <input matInput formControlName="address">
     </mat-form-field>
+    <div class="name-error error">
+      <p *ngIf="addressControl?.touched && addressControl?.hasError('required')">This field is required!</p>
+    </div>
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Phone Number</mat-label>
       <input type="tel" matInput formControlName="phoneNumber">
     </mat-form-field>
+    <div class="name-error error">
+      <p *ngIf="phoneNumberControl?.touched && phoneNumberControl?.hasError('required')">This field is required!</p>
+    </div>
     <button
       mat-stroked-button
       [disabled]="order.items.length === 0 || !form.valid"
