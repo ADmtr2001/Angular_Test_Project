@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Order} from "../../../../types/Order/Order";
+
+import {Order} from "../../../../types/Order/Order.interface";
 
 @Component({
   selector: 'app-cart-dishes-list',
@@ -13,7 +14,8 @@ export class CartDishesListComponent {
   @Output() decreaseAmount = new EventEmitter<string>();
   @Output() removeItem = new EventEmitter<string>();
 
-  constructor() { }
+  constructor() {
+  }
 
   public increaseItemAmount(id: string): void {
     this.increaseAmount.emit(id);

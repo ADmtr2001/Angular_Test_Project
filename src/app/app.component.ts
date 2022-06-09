@@ -1,20 +1,18 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from "./services/auth.service";
-import {first} from "rxjs";
-import {Router} from "@angular/router";
+
+import {Store} from "@ngrx/store";
+import {checkAuth} from "./store/user/user.actions";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
-  constructor(private authService: AuthService, private router: Router) {
+export class AppComponent implements OnInit {
+  constructor(private store: Store) {
   }
 
   public ngOnInit(): void {
-    this.authService.checkAuth().pipe(first()).subscribe((data) => {
-      this.authService.setUser(data);
-    });
+    this.store.dispatch(checkAuth());
   }
 }

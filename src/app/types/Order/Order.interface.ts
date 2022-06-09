@@ -1,7 +1,7 @@
-import {Dish} from "../Dishes/Dish";
+import {Dish} from "../Dishes/Dish.interface";
 
 export interface Order {
-  items: OrderItem[],
+  items: ReadonlyArray<OrderItem>,
   totalPrice: number,
   totalAmount: number,
 }

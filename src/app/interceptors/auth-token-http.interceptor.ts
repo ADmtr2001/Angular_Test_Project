@@ -1,17 +1,15 @@
 import {Injectable} from '@angular/core';
-import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor
-} from '@angular/common/http';
+
+import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {catchError, Observable, throwError} from 'rxjs';
-import {AuthService} from "../services/auth.service";
+
+import {Store} from "@ngrx/store";
+import {logout} from "../store/user/user.actions";
 
 @Injectable()
 export class AuthTokenHttpInterceptor implements HttpInterceptor {
 
-  constructor(private authService: AuthService) {
+  constructor(private store: Store) {
   }
 
   intercept(httpRequest: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -19,7 +17,7 @@ export class AuthTokenHttpInterceptor implements HttpInterceptor {
     return next
       .handle(this.addAuthToken(httpRequest))
       .pipe(catchError((error) => {
-      if (error.status === 500) this.authService.logout();
+      if (error.status === 500) this.store.dispatch(logout());
 
       return throwError(() => 'Not Authorized')
     }));

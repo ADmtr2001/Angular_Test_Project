@@ -1,9 +1,14 @@
 import {Component} from '@angular/core';
-import {ShoppingCartService} from "../../services/shopping-cart.service";
+
 import {Observable} from "rxjs";
-import {Order} from "../../types/Order/Order";
-import {AuthService} from "../../services/auth.service";
-import {User} from "../../types/Auth/User";
+
+import {Store} from "@ngrx/store";
+import {orderFeatureSelector} from "../../store/order/order.reducer";
+import {userSelector} from "../../store/user/user.reducer";
+import {logout} from "../../store/user/user.actions";
+
+import {User} from "../../types/Auth/User.interface";
+import {Order} from "../../types/Order/Order.interface";
 
 @Component({
   selector: 'app-navbar',
@@ -11,15 +16,13 @@ import {User} from "../../types/Auth/User";
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-  public order$: Observable<Order>;
-  public user$: Observable<User | null>;
+  public order$: Observable<Order> = this.store.select(orderFeatureSelector);
+  public user$: Observable<User | null> = this.store.select(userSelector);
 
-  constructor(private shoppingCartService: ShoppingCartService, private authService: AuthService) {
-    this.order$ = shoppingCartService.order$;
-    this.user$ = authService.user$;
+  constructor(private store: Store) {
   }
 
   public logout(): void {
-    this.authService.logout();
+    this.store.dispatch(logout());
   }
 }

@@ -1,8 +1,10 @@
 import {Component} from '@angular/core';
 
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../../../../services/auth.service";
 import {createConfirmPasswordValidator} from "../../validators/confirmPasswordValidation";
+
+import {Store} from "@ngrx/store";
+import {login, register} from "../../../../store/user/user.actions";
 
 @Component({
   selector: 'app-auth-page',
@@ -40,7 +42,9 @@ export class AuthPageComponent {
   public get logEmailControl(): AbstractControl | null {return this.loginForm.get('email')};
   public get logPasswordControl(): AbstractControl | null {return this.loginForm.get('password')};
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private store: Store) {
   }
 
   public toggleForm(): void {
@@ -49,10 +53,12 @@ export class AuthPageComponent {
 
   public submitRegisterForm(): void {
     const {name, email, password} = this.registerForm.value;
-    return this.authService.register({name, email, password});
+    const registerData = {name, email, password};
+    this.store.dispatch(register({registerData}));
   }
 
   public submitLoginForm(): void{
-    this.authService.login(this.loginForm.value);
+    const loginData = this.loginForm.value;
+    this.store.dispatch(login({loginData}));
   }
 }

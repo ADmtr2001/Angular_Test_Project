@@ -3,7 +3,9 @@ import {DishModalContentComponent} from "../../../../shared/dish-modal-content/d
 
 import {DishesService} from "../../../../services/dishes.service";
 
-import {Dish} from "../../../../types/Dishes/Dish";
+import {Dish} from "../../../../types/Dishes/Dish.interface";
+import {Store} from "@ngrx/store";
+import {setSelectedDish} from "../../../../store/dishes/dishes.actions";
 
 @Component({
   selector: 'app-dishes-item',
@@ -13,12 +15,11 @@ import {Dish} from "../../../../types/Dishes/Dish";
 export class DishesItemComponent {
   @Input() dish!: Dish;
 
-  // Это же все равно не считается dump component из-за сервиса?
-  // Нужно было бы передать ивентов вверх?
-  constructor(private dishesService: DishesService) {
+  constructor(private dishesService: DishesService, private store: Store) {
   }
 
   public openDialog(): void {
-    this.dishesService.openDishDialog(DishModalContentComponent, this.dish);
+    this.store.dispatch(setSelectedDish({dish: this.dish}));
+    this.dishesService.openDishDialog(DishModalContentComponent);
   }
 }

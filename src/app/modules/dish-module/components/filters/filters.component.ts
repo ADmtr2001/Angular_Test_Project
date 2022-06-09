@@ -3,7 +3,7 @@ import {FormControl} from '@angular/forms';
 
 import {Subject, takeUntil} from "rxjs";
 
-import {Category} from "../../../../types/Dishes/Category";
+import {Category} from "../../../../types/Dishes/Category.interface";
 
 @Component({
   selector: 'app-filters',
@@ -15,9 +15,9 @@ export class FiltersComponent implements OnInit, OnDestroy {
   @Input() currentCategoryValue: string = '';
 
   @Output() categoryChange = new EventEmitter<string>();
-  // FormBuilder
-  public searchQuery = new FormControl('');
-  public selectedCategory = new FormControl(this.currentCategoryValue);
+
+  public searchQuery: FormControl = new FormControl('');
+  public selectedCategory: FormControl = new FormControl(this.currentCategoryValue);
 
   private destroy$: Subject<void> = new Subject<void>();
 

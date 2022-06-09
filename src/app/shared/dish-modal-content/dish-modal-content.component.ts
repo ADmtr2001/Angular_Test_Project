@@ -1,13 +1,14 @@
 import {Component} from '@angular/core';
 
 import {FormControl} from "@angular/forms";
-import {BehaviorSubject} from "rxjs";
+import {Observable} from "rxjs";
 
-import {DishesService} from "../../services/dishes.service";
-import {ShoppingCartService} from "../../services/shopping-cart.service";
+import {Store} from "@ngrx/store";
+import {addItem} from "../../store/order/order.actions";
+import {selectedDishSelector} from "../../store/dishes/dishes.reducer";
 
-import {Dish} from "../../types/Dishes/Dish";
-import {OrderItem} from "../../types/Order/Order";
+import {OrderItem} from "../../types/Order/Order.interface";
+import {Dish} from "../../types/Dishes/Dish.interface";
 
 @Component({
   selector: 'app-dish-modal-content',
@@ -15,16 +16,15 @@ import {OrderItem} from "../../types/Order/Order";
   styleUrls: ['./dish-modal-content.component.scss']
 })
 export class DishModalContentComponent {
-  public amount = new FormControl('1');
+  public amount: FormControl = new FormControl('1');
 
-  public selectedDish$: BehaviorSubject<Dish>;
+  public selectedDish$: Observable<Dish | null> = this.store.select(selectedDishSelector);
 
-  constructor(private dishesService: DishesService, private shoppingCartService: ShoppingCartService) {
-    this.selectedDish$ = this.dishesService.selectedDish$;
+  constructor(private store: Store) {
   }
 
   public addDishToCart(dish: Dish): void {
     const orderItem: OrderItem = {dish, amount: +this.amount.value};
-    this.shoppingCartService.addItem(orderItem);
+    this.store.dispatch(addItem({orderItem}));
   }
 }

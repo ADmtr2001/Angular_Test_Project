@@ -1,9 +1,15 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {DishesService} from "../../../../services/dishes.service";
+
 import {ActivatedRoute, Router} from "@angular/router";
-import {BehaviorSubject, first, Observable, Subject, takeUntil, tap} from "rxjs";
-import {Category} from "../../../../types/Dishes/Category";
-import {Dish} from "../../../../types/Dishes/Dish";
+import {DishesService} from "../../../../services/dishes.service";
+import {first, Observable, Subject, takeUntil} from "rxjs";
+
+import {Store} from "@ngrx/store";
+import {dishesSelector, isDishesLoadingSelector} from "../../../../store/dishes/dishes.reducer";
+import {fetchDishes} from "../../../../store/dishes/dishes.actions";
+
+import {Category} from "../../../../types/Dishes/Category.interface";
+import {Dish} from "../../../../types/Dishes/Dish.interface";
 
 @Component({
   selector: 'app-dishes-page',
@@ -14,15 +20,15 @@ export class DishesPageComponent implements OnInit, OnDestroy {
   public categories: Category[] = [];
   public currentCategoryValue: string = '';
 
-  public dishes$: Observable<Dish[]>;
-  public isDishesLoading$: Observable<boolean>;
+  public dishes$: Observable<readonly Dish[]> = this.store.select(dishesSelector);
+  public isDishesLoading$: Observable<boolean> = this.store.select(isDishesLoadingSelector);
   private destroy$: Subject<void> = new Subject<void>();
 
-  constructor(private dishesService: DishesService,
-              private router: Router,
-              private activatedRoute: ActivatedRoute) {
-    this.dishes$ = this.dishesService.dishes$;
-    this.isDishesLoading$ = this.dishesService.isDishesLoading$;
+  constructor(
+    private dishesService: DishesService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private store: Store) {
   }
 
   public ngOnInit(): void {
@@ -31,10 +37,12 @@ export class DishesPageComponent implements OnInit, OnDestroy {
       .pipe(first())
       .subscribe((categories) => this.categories = [{_id: '', name: 'All'}, ...categories]);
 
-    this.activatedRoute.params.pipe(takeUntil(this.destroy$)).subscribe((category) => {
-      this.currentCategoryValue = category['category'] || '';
-      this.dishesService.fetchDishes(category);
-    });
+    this.activatedRoute.params
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((category) => {
+        this.currentCategoryValue = category['category'] || '';
+        this.store.dispatch(fetchDishes({queryParams: category}));
+      });
   }
 
   public ngOnDestroy(): void {
