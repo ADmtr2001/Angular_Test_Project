@@ -3,13 +3,10 @@ import {environment} from "../../environments/environment";
 
 import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
-import {first} from "rxjs";
+import {Observable, switchMap} from "rxjs";
 
 import {Store} from "@ngrx/store";
-import {resetOrder} from "../store/order/order.actions";
 import {orderFeatureSelector} from "../store/order/order.reducer";
-
-import {Dish} from "../types/Dishes/Dish.interface";
 import {UserInfoFormData} from "../types/Order/UserInfoFormData.interface";
 
 @Injectable({
@@ -22,18 +19,10 @@ export class ShoppingCartService {
     private store: Store) {
   }
 
-  public makeOrder(userInfo: UserInfoFormData): void {
+  public makeOrder(userInfo: UserInfoFormData): Observable<void> {
     const url = `${environment.api_url}/order`;
     const order$ = this.store.select(orderFeatureSelector);
 
-    order$.pipe(first()).subscribe((order) => {
-      this.http.post<Dish[]>(url, {order, userInfo})
-        .pipe(first())
-        .subscribe((data) => {
-          this.store.dispatch(resetOrder());
-          this.router.navigate(['']);
-        });
-    })
+    return order$.pipe(switchMap((order) => this.http.post<void>(url, {order, userInfo})));
   }
-
 }

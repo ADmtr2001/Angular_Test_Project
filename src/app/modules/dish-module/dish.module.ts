@@ -13,7 +13,7 @@ import {
 } from "../../shared/dish-modal-content/dish-modal-content.component";
 import {FormatSelectPipe} from "../../pipes/format-select.pipe";
 import {DishRoutingModule} from "./dish-routing.module";
-import {LoaderComponent} from "./components/loader/loader.component";
+import {LoaderModule} from "../loader-module/loader.module";
 
 const DishComponents = [
   DishesPageComponent,
@@ -21,8 +21,7 @@ const DishComponents = [
   DishesItemComponent,
   FiltersComponent,
   DishModalContentComponent,
-  FormatSelectPipe,
-  LoaderComponent
+  FormatSelectPipe
 ];
 
 @NgModule({
@@ -32,7 +31,8 @@ const DishComponents = [
     CommonModule,
     MaterialModule,
     ReactiveFormsModule,
-    DishRoutingModule
+    DishRoutingModule,
+    LoaderModule,
   ]
 })
 export class DishModule {}

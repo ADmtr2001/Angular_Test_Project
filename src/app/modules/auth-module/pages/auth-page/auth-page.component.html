@@ -36,7 +36,13 @@
         <p *ngIf="regPasswordConfControl?.touched && regPasswordConfControl?.hasError('required')">This field is required!</p>
         <p *ngIf="regPasswordConfControl?.touched && regPasswordConfControl?.hasError('passwordConfirm')">Passwords don't match!</p>
       </div>
-      <button mat-stroked-button [disabled]="!registerForm.valid">Sign Up</button>
+
+      <p class="request-error">{{signupError$ | async}}</p>
+
+      <app-loader *ngIf="(isSignup$ | async); else registerSubmitButton"></app-loader>
+      <ng-template #registerSubmitButton>
+        <button mat-stroked-button [disabled]="!registerForm.valid">Sign Up</button>
+      </ng-template>
     </form>
   </ng-template>
 
@@ -59,7 +65,13 @@
         <p *ngIf="logPasswordControl?.touched && logPasswordControl?.hasError('minlength')">Min password length: 6!</p>
         <p *ngIf="logPasswordControl?.touched && logPasswordControl?.hasError('maxlength')">Max password length: 20!</p>
       </div>
-      <button mat-stroked-button [disabled]="!loginForm.valid">Login</button>
+
+      <p class="request-error">{{loginError$ | async}}</p>
+
+      <app-loader *ngIf="(isLogin$ | async); else loginSubmitButton"></app-loader>
+      <ng-template #loginSubmitButton>
+        <button mat-stroked-button [disabled]="!loginForm.valid">Login</button>
+      </ng-template>
     </form>
   </ng-template>
 

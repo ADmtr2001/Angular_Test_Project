@@ -19,6 +19,7 @@ import {reducers} from "./store";
 import {OrderEffects} from "./store/order/order.effects";
 import {DishesEffects} from "./store/dishes/dishes.effects";
 import {UserEffects} from "./store/user/user.effects";
+import {LoaderModule} from "./modules/loader-module/loader.module";
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import {UserEffects} from "./store/user/user.effects";
     BrowserAnimationsModule,
     HttpClientModule,
     MaterialModule,
+    LoaderModule,
     StoreModule.forRoot(reducers, {}),
     EffectsModule.forRoot([OrderEffects, DishesEffects, UserEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
@@ -46,3 +48,4 @@ import {UserEffects} from "./store/user/user.effects";
 })
 export class AppModule {
 }
+

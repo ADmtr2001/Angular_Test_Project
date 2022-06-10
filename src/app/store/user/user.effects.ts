@@ -2,38 +2,47 @@ import {Injectable} from "@angular/core";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {map, mergeMap} from "rxjs/operators";
 import {
-  checkAuth,
+  checkAuth, checkAuthError,
   checkAuthSuccess,
-  login,
+  login, loginError,
   loginSuccess,
   logout,
   logoutSuccess,
-  register,
+  register, registerError,
   registerSuccess
 } from "./user.actions";
 import {AuthService} from "../../services/auth.service";
 import {Router} from "@angular/router";
+import {catchError, of} from "rxjs";
 
 @Injectable()
 export class UserEffects {
   register$ = createEffect(() => this.actions$.pipe(
     ofType(register),
-    mergeMap((action) => this.authService.register(action.registerData)),
-    map((authData) => {
-      localStorage.setItem("token", authData.accessToken);
-      this.router.navigate(['']);
-      return registerSuccess({user: authData.user});
-    })
+    mergeMap((action) => this.authService
+      .register(action.registerData)
+      .pipe(
+        map((authData) => {
+          localStorage.setItem("token", authData.accessToken);
+          this.router.navigate(['']);
+          return registerSuccess({user: authData.user});
+        }),
+        catchError((errorMessage) => of(registerError({errorMessage})))
+      )),
   ));
 
   login$ = createEffect(() => this.actions$.pipe(
     ofType(login),
-    mergeMap((action) => this.authService.login(action.loginData)),
-    map((authData) => {
-      localStorage.setItem("token", authData.accessToken);
-      this.router.navigate(['']);
-      return loginSuccess({user: authData.user});
-    })
+    mergeMap((action) => this.authService
+      .login(action.loginData)
+      .pipe(
+        map((authData) => {
+          localStorage.setItem("token", authData.accessToken);
+          this.router.navigate(['']);
+          return loginSuccess({user: authData.user});
+        }),
+        catchError((errorMessage) => of(loginError({errorMessage})))
+      )),
   ));
 
   logout$ = createEffect(() => this.actions$.pipe(
@@ -48,11 +57,15 @@ export class UserEffects {
 
   checkAuth$ = createEffect(() => this.actions$.pipe(
     ofType(checkAuth),
-    mergeMap((action) => this.authService.checkAuth()),
-    map((authData) => {
-      localStorage.setItem("token", authData.accessToken);
-      return checkAuthSuccess({user: authData.user});
-    })
+    mergeMap((action) => this.authService
+      .checkAuth()
+      .pipe(
+        map((authData) => {
+          localStorage.setItem("token", authData.accessToken);
+          return checkAuthSuccess({user: authData.user});
+        }),
+        catchError((errorMessage) => of(checkAuthError({errorMessage})))
+      ))
   ));
 
   constructor(

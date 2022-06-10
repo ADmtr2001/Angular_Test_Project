@@ -5,6 +5,13 @@ import {createConfirmPasswordValidator} from "../../validators/confirmPasswordVa
 
 import {Store} from "@ngrx/store";
 import {login, register} from "../../../../store/user/user.actions";
+import {Observable} from "rxjs";
+import {
+  isLoginSelector,
+  isSignupSelector,
+  loginErrorSelector,
+  signupErrorSelector
+} from "../../../../store/user/user.reducer";
 
 @Component({
   selector: 'app-auth-page',
@@ -13,6 +20,11 @@ import {login, register} from "../../../../store/user/user.actions";
 })
 export class AuthPageComponent {
   public isSignUpForm = true;
+
+  public isSignup$: Observable<boolean> = this.store.select(isSignupSelector);
+  public isLogin$: Observable<boolean> = this.store.select(isLoginSelector);
+  public signupError$: Observable<string> = this.store.select(signupErrorSelector);
+  public loginError$: Observable<string> = this.store.select(loginErrorSelector);
 
   public registerForm: FormGroup = this.formBuilder.group({
     "name": ["", [Validators.required]],

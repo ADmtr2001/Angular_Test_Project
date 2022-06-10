@@ -6,6 +6,7 @@ import {MaterialModule} from "../material-module/material.module";
 
 import {AuthPageComponent} from "./pages/auth-page/auth-page.component";
 import {AuthRoutingModule} from "./auth-routing.module";
+import {LoaderModule} from "../loader-module/loader.module";
 
 const AuthComponents = [
   AuthPageComponent
@@ -18,7 +19,8 @@ const AuthComponents = [
     CommonModule,
     MaterialModule,
     ReactiveFormsModule,
-    AuthRoutingModule
+    AuthRoutingModule,
+    LoaderModule
   ]
 })
 export class AuthModule {

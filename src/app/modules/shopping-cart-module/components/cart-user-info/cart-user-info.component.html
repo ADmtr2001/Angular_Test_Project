@@ -6,6 +6,7 @@
     </mat-form-field>
     <div class="name-error error">
       <p *ngIf="nameControl?.touched && nameControl?.hasError('required')">This field is required!</p>
+      <p *ngIf="nameControl?.touched && nameControl?.hasError('pattern')">Provide a valid name!</p>
     </div>
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Surname</mat-label>
@@ -13,6 +14,7 @@
     </mat-form-field>
     <div class="name-error error">
       <p *ngIf="surnameControl?.touched && surnameControl?.hasError('required')">This field is required!</p>
+      <p *ngIf="surnameControl?.touched && surnameControl?.hasError('pattern')">Provide a valid surname!</p>
     </div>
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Address</mat-label>
@@ -27,6 +29,9 @@
     </mat-form-field>
     <div class="name-error error">
       <p *ngIf="phoneNumberControl?.touched && phoneNumberControl?.hasError('required')">This field is required!</p>
+      <p *ngIf="phoneNumberControl?.touched && phoneNumberControl?.hasError('pattern')">Provide a valid phone number!</p>
+      <p *ngIf="phoneNumberControl?.touched && phoneNumberControl?.hasError('minlength')">Min phone number length: 10!</p>
+      <p *ngIf="phoneNumberControl?.touched && phoneNumberControl?.hasError('maxlength')">Min phone number length: 12!</p>
     </div>
     <button
       mat-stroked-button

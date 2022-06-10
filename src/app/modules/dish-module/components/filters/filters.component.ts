@@ -11,7 +11,7 @@ import {Category} from "../../../../types/Dishes/Category.interface";
   styleUrls: ['./filters.component.scss']
 })
 export class FiltersComponent implements OnInit, OnDestroy {
-  @Input() categories: Category[] = [];
+  @Input() categories: readonly  Category[] = [];
   @Input() currentCategoryValue: string = '';
 
   @Output() categoryChange = new EventEmitter<string>();

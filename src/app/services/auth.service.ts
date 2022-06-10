@@ -20,7 +20,6 @@ export class AuthService {
     return this.http.post<AuthResponse>(url, registerData,{withCredentials: true});
   }
 
-
   public login(loginData: LoginData): Observable<AuthResponse> {
     const url = `${environment.api_url}/user/login`;
     return this.http.post<AuthResponse>(url, loginData, {withCredentials: true});

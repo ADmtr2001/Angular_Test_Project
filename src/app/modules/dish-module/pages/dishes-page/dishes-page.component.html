@@ -1,2 +1,2 @@
-<app-filters [categories]="categories" [currentCategoryValue]="currentCategoryValue" (categoryChange)="onCategoryChange($event)"></app-filters>
+<app-filters [categories]="(categories$ | async) || []" [currentCategoryValue]="currentCategoryValue" (categoryChange)="onCategoryChange($event)"></app-filters>
 <app-dishes-list [dishes]="(dishes$ | async) || []" [isDishesLoading]="(isDishesLoading$ | async) || false"></app-dishes-list>

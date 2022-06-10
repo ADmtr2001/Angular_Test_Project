@@ -5,8 +5,8 @@ import {DishesService} from "../../../../services/dishes.service";
 import {first, Observable, Subject, takeUntil} from "rxjs";
 
 import {Store} from "@ngrx/store";
-import {dishesSelector, isDishesLoadingSelector} from "../../../../store/dishes/dishes.reducer";
-import {fetchDishes} from "../../../../store/dishes/dishes.actions";
+import {categoriesSelector, dishesSelector, isDishesLoadingSelector} from "../../../../store/dishes/dishes.reducer";
+import {fetchCategories, fetchDishes} from "../../../../store/dishes/dishes.actions";
 
 import {Category} from "../../../../types/Dishes/Category.interface";
 import {Dish} from "../../../../types/Dishes/Dish.interface";
@@ -17,7 +17,7 @@ import {Dish} from "../../../../types/Dishes/Dish.interface";
   styleUrls: ['./dishes-page.component.scss']
 })
 export class DishesPageComponent implements OnInit, OnDestroy {
-  public categories: Category[] = [];
+  public categories$: Observable<readonly Category[]> = this.store.select(categoriesSelector);
   public currentCategoryValue: string = '';
 
   public dishes$: Observable<readonly Dish[]> = this.store.select(dishesSelector);
@@ -32,10 +32,7 @@ export class DishesPageComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    this.dishesService
-      .fetchCategories()
-      .pipe(first())
-      .subscribe((categories) => this.categories = [{_id: '', name: 'All'}, ...categories]);
+    this.store.dispatch(fetchCategories());
 
     this.activatedRoute.params
       .pipe(takeUntil(this.destroy$))

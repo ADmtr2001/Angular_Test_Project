@@ -4,7 +4,7 @@ import {Observable} from "rxjs";
 
 import {Store} from "@ngrx/store";
 import {orderFeatureSelector} from "../../store/order/order.reducer";
-import {userSelector} from "../../store/user/user.reducer";
+import {isUserLoadingSelector, userSelector} from "../../store/user/user.reducer";
 import {logout} from "../../store/user/user.actions";
 
 import {User} from "../../types/Auth/User.interface";
@@ -18,6 +18,7 @@ import {Order} from "../../types/Order/Order.interface";
 export class NavbarComponent {
   public order$: Observable<Order> = this.store.select(orderFeatureSelector);
   public user$: Observable<User | null> = this.store.select(userSelector);
+  public isUserLoading$: Observable<boolean> = this.store.select(isUserLoadingSelector);
 
   constructor(private store: Store) {
   }
