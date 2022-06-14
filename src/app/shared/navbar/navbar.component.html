@@ -8,7 +8,12 @@
 
  <ng-template #buttons>
    <div class="buttons" *ngIf="(user$ | async)">
-     <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" [routerLink]="'/shopping-cart'">
+     <button
+       mat-icon-button class="example-icon favorite-icon"
+       aria-label="Example icon-button with heart icon"
+       [routerLink]="'/shopping-cart'"
+       *ngIf="(user$ | async)?.role !== 'admin'"
+     >
        <mat-icon [matBadge]="(order$ | async)?.totalAmount" matBadgeColor="warn">shopping_cart</mat-icon>
      </button>
      <button

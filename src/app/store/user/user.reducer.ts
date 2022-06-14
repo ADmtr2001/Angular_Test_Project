@@ -1,15 +1,20 @@
 import {createFeatureSelector, createReducer, createSelector, on} from "@ngrx/store";
-import {User} from "../../types/Auth/User.interface";
+
 import {
   checkAuth,
   checkAuthError,
-  checkAuthSuccess, login, loginError,
+  checkAuthSuccess, fetchUsers, fetchUsersError, fetchUsersSuccess, login, loginError,
   loginSuccess,
   logoutSuccess, register, registerError,
   registerSuccess
 } from "./user.actions";
 
+import {User} from "../../types/Auth/User.interface";
+
 export interface UserState {
+  users: ReadonlyArray<User>;
+  isUsersLoading: boolean;
+  usersError: string;
   user: User | null;
   isUserLoading: boolean;
   userError: string;
@@ -20,6 +25,9 @@ export interface UserState {
 }
 
 export const initialState: UserState = {
+  users: [],
+  isUsersLoading: false,
+  usersError: '',
   user: null,
   isUserLoading: false,
   userError: '',
@@ -31,6 +39,15 @@ export const initialState: UserState = {
 
 export const userReducer = createReducer(
   initialState,
+  on(fetchUsers, (state) => {
+    return {...state, isUsersLoading: true, usersError: ''};
+  }),
+  on(fetchUsersSuccess, (state, {users}) => {
+    return {...state, users, isUsersLoading: false, usersError: ''};
+  }),
+  on(fetchUsersError, (state, {errorMessage}) => {
+    return {...state, isUsersLoading: false, usersError: errorMessage};
+  }),
   on(register, (state) => {
     return {...state, isSignup: true, signupError: ''};
   }),
@@ -64,10 +81,17 @@ export const userReducer = createReducer(
 );
 
 export const userFeatureSelector = createFeatureSelector<UserState>('user');
+
+export const allUsersSelector = createSelector((userFeatureSelector), (state) => state.users);
+export const allUsersLoadingSelector = createSelector((userFeatureSelector), (state) => state.isUsersLoading);
+export const allUsersErrorSelector = createSelector((userFeatureSelector), (state) => state.usersError);
+
 export const userSelector = createSelector(userFeatureSelector, (state) => state.user);
 export const isUserLoadingSelector = createSelector(userFeatureSelector, (state) => state.isUserLoading);
 export const userErrorSelector = createSelector(userFeatureSelector, (state) => state.userError);
+
 export const isLoginSelector = createSelector(userFeatureSelector, (state) => state.isLogin);
 export const loginErrorSelector = createSelector(userFeatureSelector, (state) => state.loginError);
+
 export const isSignupSelector = createSelector(userFeatureSelector, (state) => state.isSignup);
 export const signupErrorSelector = createSelector(userFeatureSelector, (state) => state.signupError);

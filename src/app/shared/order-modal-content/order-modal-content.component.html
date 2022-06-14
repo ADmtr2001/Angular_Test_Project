@@ -1,0 +1,26 @@
+<section *ngIf="(selectedOrder$ | async) as order">
+  <mat-dialog-content class="mat-typography">
+    <div class="user-info">
+      <p>Name: {{order.userInfo.name}}</p>
+      <p>Surname: {{order.userInfo.surname}}</p>
+      <p>Address: {{order.userInfo.address}}</p>
+      <p>Phone Number: {{order.userInfo.phoneNumber}}</p>
+      <p>ID: {{order._id}}</p>
+      <p>Time: {{order.createdAt | date:'MMM d, y, h:mm:ss a'}}</p>
+    </div>
+    <div class="items-list">
+      <article class="item" *ngFor="let item of order.order.items">
+
+        <div class="image">
+          <img src="{{item.dish.image}}" alt="">
+        </div>
+
+        <div class="info">
+          <h3 class="item-title">{{item.dish.title}}({{item.amount}})</h3>
+          <p class="price">{{item.dish.price * item.amount}}$</p>
+        </div>
+
+      </article>
+    </div>
+  </mat-dialog-content>
+</section>

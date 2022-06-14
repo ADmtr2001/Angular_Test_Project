@@ -3,11 +3,11 @@ import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 import {Store} from "@ngrx/store";
-import {orderFeatureSelector} from "../../../../store/order/order.reducer";
+import {orderSelector} from "../../../../store/order/order.reducer";
 import {decreaseItemAmount, increaseItemAmount, removeItem, resetOrder} from "../../../../store/order/order.actions";
 
 import {first, Observable} from "rxjs";
-import {ShoppingCartService} from "../../../../services/shopping-cart.service";
+import {OrderService} from "../../../../services/order.service";
 
 import {Order} from "../../../../types/Order/Order.interface";
 import {Router} from "@angular/router";
@@ -18,17 +18,17 @@ import {Router} from "@angular/router";
   styleUrls: ['./shopping-cart-page.component.scss']
 })
 export class ShoppingCartPageComponent {
-  public order$: Observable<Order> = this.store.select(orderFeatureSelector);
+  public order$: Observable<Order> = this.store.select(orderSelector);
 
   public userInfoForm: FormGroup = this.formBuilder.group({
     "name": ["", [Validators.required, Validators.pattern('[a-zA-Z]*')]],
     "surname": ["", [Validators.required, Validators.pattern('[a-zA-Z]*')]],
     "address": ["", [Validators.required]],
-    "phoneNumber": ["", [Validators.required, Validators.pattern('/^\\(?([0-9]{3})\\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/'), Validators.minLength(10), Validators.maxLength(12)]],
+    "phoneNumber": ["", [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(10), Validators.maxLength(12)]],
   });
 
   constructor(
-    private shoppingCartService: ShoppingCartService,
+    private shoppingCartService: OrderService,
     private formBuilder: FormBuilder,
     private store: Store,
     private router: Router) {

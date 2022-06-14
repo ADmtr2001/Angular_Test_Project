@@ -3,7 +3,7 @@ import {Component} from '@angular/core';
 import {Observable} from "rxjs";
 
 import {Store} from "@ngrx/store";
-import {orderFeatureSelector} from "../../store/order/order.reducer";
+import {orderSelector} from "../../store/order/order.reducer";
 import {isUserLoadingSelector, userSelector} from "../../store/user/user.reducer";
 import {logout} from "../../store/user/user.actions";
 
@@ -16,11 +16,12 @@ import {Order} from "../../types/Order/Order.interface";
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-  public order$: Observable<Order> = this.store.select(orderFeatureSelector);
+  public order$: Observable<Order> = this.store.select(orderSelector);
   public user$: Observable<User | null> = this.store.select(userSelector);
   public isUserLoading$: Observable<boolean> = this.store.select(isUserLoadingSelector);
 
-  constructor(private store: Store) {
+  constructor(
+    private store: Store) {
   }
 
   public logout(): void {

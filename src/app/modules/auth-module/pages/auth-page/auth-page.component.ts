@@ -4,14 +4,15 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/form
 import {createConfirmPasswordValidator} from "../../validators/confirmPasswordValidation";
 
 import {Store} from "@ngrx/store";
-import {login, register} from "../../../../store/user/user.actions";
-import {Observable} from "rxjs";
 import {
   isLoginSelector,
   isSignupSelector,
   loginErrorSelector,
   signupErrorSelector
 } from "../../../../store/user/user.reducer";
+import {login, register} from "../../../../store/user/user.actions";
+
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-auth-page',
@@ -19,11 +20,12 @@ import {
   styleUrls: ['./auth-page.component.scss']
 })
 export class AuthPageComponent {
-  public isSignUpForm = true;
+  public isSignUpForm = false;
 
   public isSignup$: Observable<boolean> = this.store.select(isSignupSelector);
-  public isLogin$: Observable<boolean> = this.store.select(isLoginSelector);
   public signupError$: Observable<string> = this.store.select(signupErrorSelector);
+
+  public isLogin$: Observable<boolean> = this.store.select(isLoginSelector);
   public loginError$: Observable<string> = this.store.select(loginErrorSelector);
 
   public registerForm: FormGroup = this.formBuilder.group({

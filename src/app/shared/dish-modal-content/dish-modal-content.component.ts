@@ -9,6 +9,8 @@ import {selectedDishSelector} from "../../store/dishes/dishes.reducer";
 
 import {OrderItem} from "../../types/Order/Order.interface";
 import {Dish} from "../../types/Dishes/Dish.interface";
+import {User} from "../../types/Auth/User.interface";
+import {userSelector} from "../../store/user/user.reducer";
 
 @Component({
   selector: 'app-dish-modal-content',
@@ -19,8 +21,10 @@ export class DishModalContentComponent {
   public amount: FormControl = new FormControl('1');
 
   public selectedDish$: Observable<Dish | null> = this.store.select(selectedDishSelector);
+  public user$: Observable<User | null> = this.store.select(userSelector);
 
-  constructor(private store: Store) {
+  constructor(
+    private store: Store) {
   }
 
   public addDishToCart(dish: Dish): void {

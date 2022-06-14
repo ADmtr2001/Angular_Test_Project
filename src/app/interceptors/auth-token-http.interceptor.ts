@@ -9,7 +9,8 @@ import {logout} from "../store/user/user.actions";
 @Injectable()
 export class AuthTokenHttpInterceptor implements HttpInterceptor {
 
-  constructor(private store: Store) {
+  constructor(
+    private store: Store) {
   }
 
   intercept(httpRequest: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

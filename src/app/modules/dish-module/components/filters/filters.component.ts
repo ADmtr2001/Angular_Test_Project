@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+
 import {FormControl} from '@angular/forms';
 
 import {Subject, takeUntil} from "rxjs";
@@ -11,10 +12,10 @@ import {Category} from "../../../../types/Dishes/Category.interface";
   styleUrls: ['./filters.component.scss']
 })
 export class FiltersComponent implements OnInit, OnDestroy {
-  @Input() categories: readonly  Category[] = [];
+  @Input() categories: ReadonlyArray<Category> = [];
   @Input() currentCategoryValue: string = '';
 
-  @Output() categoryChange = new EventEmitter<string>();
+  @Output() categoryChange: EventEmitter<string> = new EventEmitter<string>();
 
   public searchQuery: FormControl = new FormControl('');
   public selectedCategory: FormControl = new FormControl(this.currentCategoryValue);

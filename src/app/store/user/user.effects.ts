@@ -1,9 +1,13 @@
 import {Injectable} from "@angular/core";
+
+import {Router} from "@angular/router";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {map, mergeMap} from "rxjs/operators";
+import {catchError, of} from "rxjs";
+
 import {
   checkAuth, checkAuthError,
-  checkAuthSuccess,
+  checkAuthSuccess, fetchUsers, fetchUsersError, fetchUsersSuccess,
   login, loginError,
   loginSuccess,
   logout,
@@ -11,12 +15,18 @@ import {
   register, registerError,
   registerSuccess
 } from "./user.actions";
-import {AuthService} from "../../services/auth.service";
-import {Router} from "@angular/router";
-import {catchError, of} from "rxjs";
+
+import {UserService} from "../../services/user.service";
 
 @Injectable()
 export class UserEffects {
+  fetchUsers$ = createEffect(() => this.actions$.pipe(
+    ofType(fetchUsers),
+    mergeMap((action) => this.authService.fetchUsers()),
+    map((users) => fetchUsersSuccess({users})),
+    catchError((errorMessage) => of(fetchUsersError({errorMessage})))
+  ))
+
   register$ = createEffect(() => this.actions$.pipe(
     ofType(register),
     mergeMap((action) => this.authService
@@ -70,7 +80,7 @@ export class UserEffects {
 
   constructor(
     private actions$: Actions,
-    private authService: AuthService,
+    private authService: UserService,
     private router: Router) {
   }
 }

@@ -20,13 +20,16 @@ import {OrderEffects} from "./store/order/order.effects";
 import {DishesEffects} from "./store/dishes/dishes.effects";
 import {UserEffects} from "./store/user/user.effects";
 import {LoaderModule} from "./modules/loader-module/loader.module";
+import {CategoriesEffects} from "./store/categories/categories.effects";
+import { OrderModalContentComponent } from './shared/order-modal-content/order-modal-content.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    OrderModalContentComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,7 @@ import {LoaderModule} from "./modules/loader-module/loader.module";
     MaterialModule,
     LoaderModule,
     StoreModule.forRoot(reducers, {}),
-    EffectsModule.forRoot([OrderEffects, DishesEffects, UserEffects]),
+    EffectsModule.forRoot([OrderEffects, DishesEffects, UserEffects, CategoriesEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   providers: [

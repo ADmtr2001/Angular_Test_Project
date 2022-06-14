@@ -6,7 +6,6 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {MatDialog} from "@angular/material/dialog";
 
-import {Category} from "../types/Dishes/Category.interface";
 import {Dish} from "../types/Dishes/Dish.interface";
 import {ComponentType} from "@angular/cdk/overlay";
 
@@ -14,17 +13,14 @@ import {ComponentType} from "@angular/cdk/overlay";
   providedIn: 'root'
 })
 export class DishesService {
-  constructor(private http: HttpClient, private dialog: MatDialog) {
+  constructor(
+    private http: HttpClient,
+    private dialog: MatDialog) {
   }
 
   public fetchDishes(queryParams: Params): Observable<Dish[]> {
     const url = `${environment.api_url}/dish`;
     return this.http.get<Dish[]>(url, {params: queryParams});
-  }
-
-  public fetchCategories(): Observable<Category[]> {
-    const url = `${environment.api_url}/category`;
-    return this.http.get<Category[]>(url);
   }
 
   public openDishDialog<T>(component: ComponentType<T>): void {

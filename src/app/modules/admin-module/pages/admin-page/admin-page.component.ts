@@ -1,15 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
+
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-admin-page',
   templateUrl: './admin-page.component.html',
   styleUrls: ['./admin-page.component.scss']
 })
-export class AdminPageComponent implements OnInit {
+export class AdminPageComponent {
+  public currentSectionValue = '';
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) { }
 
-  ngOnInit(): void {
+  public onSectionSelect(section: string): void {
+    this.router.navigate([section], {relativeTo: this.activatedRoute});
   }
-
 }

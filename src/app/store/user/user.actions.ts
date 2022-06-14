@@ -3,6 +3,10 @@ import {RegisterData} from "../../types/Auth/RegisterData.interface";
 import {LoginData} from "../../types/Auth/LoginData.interface";
 import {User} from "../../types/Auth/User.interface";
 
+export const fetchUsers = createAction('[User] Fetch User');
+export const fetchUsersSuccess = createAction('[User] Fetch User Success', props<{users: User[]}>());
+export const fetchUsersError = createAction('[User] Fetch User Error', props<{errorMessage: string}>());
+
 export const register = createAction('[User] Register', props<{registerData: RegisterData}>());
 export const registerSuccess = createAction('[User] Register Success', props<{user: User}>());
 export const registerError = createAction('[User] Register Error', props<{errorMessage: string}>());

@@ -15,7 +15,9 @@ import {setSelectedDish} from "../../../../store/dishes/dishes.actions";
 export class DishesItemComponent {
   @Input() dish!: Dish;
 
-  constructor(private dishesService: DishesService, private store: Store) {
+  constructor(
+    private dishesService: DishesService,
+    private store: Store) {
   }
 
   public openDialog(): void {

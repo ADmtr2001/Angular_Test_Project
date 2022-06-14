@@ -11,28 +11,27 @@ import {DishesItemComponent} from "./components/dishes-item/dishes-item.componen
 import {
   DishModalContentComponent
 } from "../../shared/dish-modal-content/dish-modal-content.component";
-import {FormatSelectPipe} from "../../pipes/format-select.pipe";
 import {DishRoutingModule} from "./dish-routing.module";
 import {LoaderModule} from "../loader-module/loader.module";
+import {CustomPipesModule} from "../custom-pipes-module/custom-pipes.module";
 
 const DishComponents = [
   DishesPageComponent,
   DishesListComponent,
   DishesItemComponent,
   FiltersComponent,
-  DishModalContentComponent,
-  FormatSelectPipe
+  DishModalContentComponent
 ];
 
 @NgModule({
   declarations: [DishComponents],
-  exports: [],
   imports: [
     CommonModule,
     MaterialModule,
     ReactiveFormsModule,
     DishRoutingModule,
     LoaderModule,
+    CustomPipesModule
   ]
 })
 export class DishModule {}

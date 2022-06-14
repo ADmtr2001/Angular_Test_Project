@@ -7,12 +7,19 @@ import {HttpClient} from "@angular/common/http";
 import {AuthResponse} from "../types/Auth/AuthResponse.interface";
 import {RegisterData} from "../types/Auth/RegisterData.interface";
 import {LoginData} from "../types/Auth/LoginData.interface";
+import {User} from "../types/Auth/User.interface";
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
-  constructor(private http: HttpClient) {
+export class UserService {
+  constructor(
+    private http: HttpClient) {
+  }
+
+  public fetchUsers(): Observable<User[]> {
+    const url = `${environment.api_url}/user`;
+    return this.http.get<User[]>(url);
   }
 
   public register(registerData: RegisterData): Observable<AuthResponse> {

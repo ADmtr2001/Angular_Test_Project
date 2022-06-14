@@ -2,14 +2,17 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 
 import {ActivatedRoute, Router} from "@angular/router";
 import {DishesService} from "../../../../services/dishes.service";
-import {first, Observable, Subject, takeUntil} from "rxjs";
+import {Observable, Subject, takeUntil} from "rxjs";
 
 import {Store} from "@ngrx/store";
-import {categoriesSelector, dishesSelector, isDishesLoadingSelector} from "../../../../store/dishes/dishes.reducer";
-import {fetchCategories, fetchDishes} from "../../../../store/dishes/dishes.actions";
+import {categoriesSelector} from "../../../../store/categories/categories.reducer";
+import {dishesSelector, isDishesLoadingSelector} from "../../../../store/dishes/dishes.reducer";
+import {fetchDishes} from "../../../../store/dishes/dishes.actions";
+import {fetchCategories} from "../../../../store/categories/categories.actions";
 
 import {Category} from "../../../../types/Dishes/Category.interface";
 import {Dish} from "../../../../types/Dishes/Dish.interface";
+
 
 @Component({
   selector: 'app-dishes-page',
@@ -22,6 +25,7 @@ export class DishesPageComponent implements OnInit, OnDestroy {
 
   public dishes$: Observable<readonly Dish[]> = this.store.select(dishesSelector);
   public isDishesLoading$: Observable<boolean> = this.store.select(isDishesLoadingSelector);
+
   private destroy$: Subject<void> = new Subject<void>();
 
   constructor(

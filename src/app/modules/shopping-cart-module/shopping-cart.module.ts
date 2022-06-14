@@ -17,7 +17,7 @@ const ShoppingCartComponents = [
 
 @NgModule({
   declarations: [ShoppingCartComponents, CartDishesListComponent, CartUserInfoComponent],
-  exports: [ShoppingCartComponents],
+  exports: [ShoppingCartComponents, CartUserInfoComponent],
   imports: [
     CommonModule,
     MaterialModule,
